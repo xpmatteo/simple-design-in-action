@@ -1,4 +1,22 @@
-# Hangman
+# Sample application
+
+This is an empty, playground application.  You may start developing by changing the example servlet.
+
+## Exercises
+
+### Hello, World
+
+ Make the tests in ...HelloWorldTest.java pass
+
+### Temperature Conversion
+
+  Make the tests in ...TemperatureConversionTest.java to pass
+
+
+### Directory listing
+
+ Make the tests in ...DirectoryListingTest.java to pass
+
 
 ## HOW TO RUN
 

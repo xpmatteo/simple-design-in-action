@@ -1,10 +1,7 @@
 package it.xpug.hangman.main;
 
-
+import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.*;
-import static org.mortbay.util.ajax.JSON.*;
-import it.xpug.example.main.*;
-import it.xpug.generic.web.*;
 
 import java.io.*;
 import java.net.*;
@@ -17,56 +14,61 @@ import org.apache.http.client.entity.*;
 import org.apache.http.client.methods.*;
 import org.apache.http.impl.client.*;
 import org.apache.http.message.*;
-import org.junit.*;
 
+public class BaseTestCase {
+	protected static final int APPLICATION_PORT = 8123;
+	protected Map<String, String> params = new HashMap<String, String>();
 
-public class HangmanEnd2EndTest {
+	private HttpResponse response;
 
-	@Test
-	public void rootUrl() throws Exception {
-		get("/");
-		assertStatus(200);
-		assertMimeType("text/html; charset=UTF-8");
-		assertBody("<h1>Hello, world!</h1>");
+	protected void assertBody(String expectedBody) throws IllegalStateException, IOException {
+		assertEquals("Body", expectedBody, getBodyAsString());
 	}
 
-
-	private void assertBody(String expectedBody) throws IllegalStateException, IOException {
-		byte[] bytes = new byte[10000];
-		response.getEntity().getContent().read(bytes);
-		String body = new String(bytes, Charset.forName("UTF-8"));
-		assertEquals("Body", parse(expectedBody), parse(body));
+	protected void assertBodyStartsWith(String string) throws IOException {
+		assertThat(getBodyAsString(), startsWith(string));
 	}
 
-	private void assertMimeType(String expectedMimeType) {
+	protected void assertBodyContains(String expected) throws IOException {
+		assertThat(getBodyAsString(), containsString(expected));
+	}
+
+	protected void assertMimeType(String expectedMimeType) {
 		assertHeader("content-type", expectedMimeType);
 	}
 
-	private void assertLocationHeader(String expectedLocation) {
+	protected void assertLocationHeader(String expectedLocation) {
 		assertHeader("location", expectedLocation);
 	}
 
-	private void assertHeader(String name, String expectedValue) {
+	protected void assertHeader(String name, String expectedValue) {
 		Header header = response.getLastHeader(name.toLowerCase());
 		assertNotNull(name + " not set", header);
 		assertEquals(name, expectedValue, header.getValue());
 	}
 
-	private void assertStatus(int expectedStatus) {
+	protected void assertStatus(int expectedStatus) {
 		assertEquals("Status code", expectedStatus, response.getStatusLine().getStatusCode());
 	}
 
-	private void get(String path) throws IOException, URISyntaxException {
+	protected void get(String path) throws Exception {
 		URI url = new URI(baseUrl() + path + queryString());
 		HttpGet request = new HttpGet(url);
 		this.response = makeHttpClient().execute(request);
 	}
 
-	private void post(String path) throws URISyntaxException, ClientProtocolException, IOException {
+	protected void post(String path) throws Exception {
 		URI url = new URI(baseUrl() + path);
 		HttpPost request = new HttpPost(url);
 		addParameters(request);
 		this.response = makeHttpClient().execute(request);
+	}
+
+	private String getBodyAsString() throws IOException {
+		byte[] bytes = new byte[10000];
+		response.getEntity().getContent().read(bytes);
+		String body = new String(bytes, Charset.forName("UTF-8"));
+		return body;
 	}
 
 	private HttpClient makeHttpClient() {
@@ -97,18 +99,4 @@ public class HangmanEnd2EndTest {
 		request.setEntity(new UrlEncodedFormEntity(parameters));
 	}
 
-	@BeforeClass
-	public static void startApplication() throws Exception {
-		app.start(APPLICATION_PORT, "../hangman-server/src/main/webapp");
-	}
-
-	@AfterClass
-	public static void shutdownApplication() throws Exception {
-		app.shutdown();
-	}
-
-	private static final int APPLICATION_PORT = 8123;
-	private static ReusableJettyApp app = new ReusableJettyApp(new ExampleServlet());
-	private HttpResponse response;
-	private Map<String, String> params = new HashMap<String, String>();
 }
