@@ -1,9 +1,8 @@
-package it.xpug.hangman.main;
+package it.xpug.example.main;
 
 
 import static java.lang.Integer.*;
 import it.xpug.generic.web.*;
-import it.xpug.hangman.domain.*;
 
 
 public class Main {
@@ -13,7 +12,7 @@ public class Main {
 			port = "8080";
 		}
 
-		ReusableJettyApp app = new ReusableJettyApp(new HangmanServlet(new UserBase()));
+		ReusableJettyApp app = new ReusableJettyApp(new ExampleServlet());
 		app.start(valueOf(port), "src/main/webapp");
 	}
 }
