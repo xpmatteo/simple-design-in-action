@@ -16,7 +16,7 @@ public class TemperatureConversionTest extends BaseTestCase {
 	public void containsAFieldForCelsius() throws Exception {
 		get("/temp");
 		assertStatus(200);
-		assertMimeType("text/html");
+		assertContentType("text/html");
 		String expected = "<input type='text' name='celsius' />";
 		assertBodyContains(expected);
 	}
@@ -25,7 +25,7 @@ public class TemperatureConversionTest extends BaseTestCase {
 	public void convertsCelsiusToFahrenheit() throws Exception {
 		get("/temp?celsius=0");
 		assertStatus(200);
-		assertMimeType("text/html");
+		assertContentType("text/html");
 		assertBodyContains("<p id='output'>0.0&deg;C = 32.0&deg;F</p>");
 	}
 
@@ -33,7 +33,7 @@ public class TemperatureConversionTest extends BaseTestCase {
 	public void containsAFieldForFahrenheit() throws Exception {
 		get("/temp");
 		assertStatus(200);
-		assertMimeType("text/html");
+		assertContentType("text/html");
 		assertBodyContains("<input type='text' name='fahrenheit' />");
 	}
 
@@ -41,7 +41,7 @@ public class TemperatureConversionTest extends BaseTestCase {
 	public void convertsFahrenheitToCelsius() throws Exception {
 		get("/temp?fahrenheit=32");
 		assertStatus(200);
-		assertMimeType("text/html");
+		assertContentType("text/html");
 		assertBodyContains("<p id='output'>32.0&deg;F = 0.0&deg;C</p>");
 	}
 

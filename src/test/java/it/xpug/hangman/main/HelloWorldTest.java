@@ -13,7 +13,7 @@ public class HelloWorldTest extends BaseTestCase {
 	public void helloWorld() throws Exception {
 		get("/hello");
 		assertStatus(200);
-		assertMimeType("text/html; charset=UTF-8");
+		assertContentType("text/html; charset=utf-8");
 		assertBody("<h1>Hello, world!</h1>");
 	}
 

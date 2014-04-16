@@ -33,7 +33,7 @@ public class BaseTestCase {
 		assertThat(getBodyAsString(), containsString(expected));
 	}
 
-	protected void assertMimeType(String expectedMimeType) {
+	protected void assertContentType(String expectedMimeType) {
 		assertHeader("content-type", expectedMimeType);
 	}
 

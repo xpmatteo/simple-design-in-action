@@ -13,7 +13,7 @@ public class DirectoryListingTest extends BaseTestCase {
 	public void returnsATextFile() throws Exception {
 		get("/files/ciao.txt");
 		assertStatus(200);
-		assertMimeType("text/plain");
+		assertContentType("text/plain");
 		assertBody("ciao");
 	}
 
@@ -21,7 +21,7 @@ public class DirectoryListingTest extends BaseTestCase {
 	public void returnsAGraphicFile() throws Exception {
 		get("/files/spinner.gif");
 		assertStatus(200);
-		assertMimeType("image/gif");
+		assertContentType("image/gif");
 		assertBodyStartsWith("GIF");
 	}
 
@@ -29,7 +29,7 @@ public class DirectoryListingTest extends BaseTestCase {
 	public void returnsDirectoryListing() throws Exception {
 		get("/files/");
 		assertStatus(200);
-		assertMimeType("text/html");
+		assertContentType("text/html");
 		String expected = "<html>\n" +
 				"  <head>\n" +
 				"    <title>Index of /files</title>\n" +
