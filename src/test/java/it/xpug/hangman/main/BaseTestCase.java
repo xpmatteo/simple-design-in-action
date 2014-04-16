@@ -68,7 +68,7 @@ public class BaseTestCase {
 		byte[] bytes = new byte[10000];
 		response.getEntity().getContent().read(bytes);
 		String body = new String(bytes, Charset.forName("UTF-8"));
-		return body;
+		return body.trim();
 	}
 
 	private HttpClient makeHttpClient() {
