@@ -62,3 +62,8 @@ That is, there should be a single text field.
 
  The formula for converting from Celsius to Fahrenheit is easily found with Google.
 
+
+## Example Solution
+
+You should see a solved version working at http://aw-servlet-exercises.herokuapp.com/
+
