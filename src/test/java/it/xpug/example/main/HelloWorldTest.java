@@ -1,7 +1,6 @@
-package it.xpug.hangman.main;
+package it.xpug.example.main;
 
 
-import it.xpug.example.main.*;
 import it.xpug.generic.web.*;
 
 import org.junit.*;

@@ -1,4 +1,4 @@
-package it.xpug.hangman.main;
+package it.xpug.example.main;
 
 import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.*;
