@@ -25,7 +25,7 @@ public class Lezione6Servlet extends HttpServlet {
 			return new HelloWorldResource(response);
 		}
 		if ("/todolists".equals(request.getRequestURI())) {
-			return new TodoLists(request, response, todoLists);
+			return new TodoListsResource(request, response, todoLists);
 		}
 	    return new FourOhFour(response);
     }
