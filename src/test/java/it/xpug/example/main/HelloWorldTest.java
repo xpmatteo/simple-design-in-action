@@ -1,14 +1,14 @@
 package it.xpug.example.main;
 
 
-import it.xpug.generic.web.*;
+import it.xpug.toolkit.web.*;
 
 import org.junit.*;
 
 
 public class HelloWorldTest extends BaseTestCase {
 
-	@Test
+	@Test@Ignore
 	public void helloWorld() throws Exception {
 		get("/hello");
 		assertStatus(200);

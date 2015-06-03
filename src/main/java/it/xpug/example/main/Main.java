@@ -2,7 +2,7 @@ package it.xpug.example.main;
 
 
 import static java.lang.Integer.*;
-import it.xpug.generic.web.*;
+import it.xpug.toolkit.web.*;
 
 
 public class Main {

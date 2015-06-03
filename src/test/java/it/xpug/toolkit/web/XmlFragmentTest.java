@@ -1,7 +1,7 @@
-package it.xpug.generic.web;
+package it.xpug.toolkit.web;
 
 import static org.junit.Assert.*;
-import it.xpug.generic.web.XmlFragment.ElementNotFoundException;
+import it.xpug.toolkit.web.XmlFragment.ElementNotFoundException;
 
 import java.util.*;
 

@@ -1,4 +1,4 @@
-package it.xpug.generic.web;
+package it.xpug.toolkit.web;
 
 import static org.junit.Assert.*;
 

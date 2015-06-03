@@ -1,6 +1,6 @@
 package it.xpug.example.main;
 
-import it.xpug.generic.web.*;
+import it.xpug.toolkit.web.*;
 
 import org.junit.*;
 
