@@ -1,6 +1,7 @@
 package it.xpug.example.main;
 
 
+import it.xpug.lezione6.main.*;
 import it.xpug.toolkit.web.*;
 
 import org.junit.*;
@@ -32,5 +33,5 @@ public class HelloWorldTest extends BaseTestCase {
 		app.shutdown();
 	}
 
-	private static ReusableJettyApp app = new ReusableJettyApp(new ExampleServlet());
+	private static ReusableJettyApp app = new ReusableJettyApp(new Lezione6Servlet());
 }
