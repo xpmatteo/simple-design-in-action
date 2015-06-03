@@ -14,7 +14,7 @@ public class Lezione6Servlet extends HttpServlet {
 
 	@Override
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("Serving: " + request.getRequestURI());
+		System.out.println("Serving: " + request.getMethod() + " " + request.getRequestURI());
 		
 		Resource resource = getResource(request, response);
 		resource.service();
