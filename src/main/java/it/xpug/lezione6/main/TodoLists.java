@@ -7,12 +7,12 @@ import javax.servlet.http.*;
 
 import org.json.*;
 
-public class TodolistsResource extends Resource {
+public class TodoLists extends Resource {
 	
 	private List<String> todoLists;
 	private HttpServletResponse response;
 
-	public TodolistsResource(HttpServletRequest request, HttpServletResponse response, List<String> todoLists) {
+	public TodoLists(HttpServletRequest request, HttpServletResponse response, List<String> todoLists) {
 		this.response = response;
 		this.todoLists = todoLists;
     }
