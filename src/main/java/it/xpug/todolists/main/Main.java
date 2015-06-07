@@ -1,4 +1,4 @@
-package it.xpug.lezione6.main;
+package it.xpug.todolists.main;
 
 
 import static java.lang.Integer.*;
@@ -12,7 +12,7 @@ public class Main {
 			port = "8080";
 		}
 
-		ReusableJettyApp app = new ReusableJettyApp(new Lezione6Servlet());
+		ReusableJettyApp app = new ReusableJettyApp(new TodoListsServlet());
 		app.start(valueOf(port), "src/main/webapp");
 	}
 }

@@ -1,14 +1,14 @@
-package it.xpug.lezione6.main;
+package it.xpug.todolists.main;
 
 import java.io.*;
 
 import javax.servlet.http.*;
 
-public class FourOhFour extends Resource {
+public class Notfound extends Resource {
 
 	private HttpServletResponse response;
 
-	public FourOhFour(HttpServletResponse response) {
+	public Notfound(HttpServletResponse response) {
 		this.response = response;
     }
 

@@ -1,4 +1,4 @@
-package it.xpug.lezione6.main;
+package it.xpug.todolists.main;
 
 import static java.util.Collections.*;
 
@@ -8,7 +8,7 @@ import java.util.*;
 import javax.servlet.*;
 import javax.servlet.http.*;
 
-public class Lezione6Servlet extends HttpServlet {
+public class TodoListsServlet extends HttpServlet {
 	
 	static List<String> todoLists = synchronizedList(new ArrayList<String>());
 
@@ -27,7 +27,7 @@ public class Lezione6Servlet extends HttpServlet {
 		if ("/todolists".equals(request.getRequestURI())) {
 			return new TodoListsResource(request, response, todoLists);
 		}
-	    return new FourOhFour(response);
+	    return new Notfound(response);
     }
 
 }

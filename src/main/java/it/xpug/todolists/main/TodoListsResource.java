@@ -1,4 +1,4 @@
-package it.xpug.lezione6.main;
+package it.xpug.todolists.main;
 
 import java.io.*;
 import java.util.*;
