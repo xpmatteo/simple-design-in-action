@@ -1,5 +1,7 @@
 package it.xpug.todolists.main;
 
+import static javax.servlet.http.HttpServletResponse.*;
+
 import java.io.*;
 import java.util.*;
 
@@ -21,11 +23,14 @@ public class TodoListsResource extends Resource {
 
 	@Override
 	public void service() throws IOException {
-		if ("POST".equals(request.getMethod()) && null == request.getParameter("name")) {
-			// ... return 400 Bad Request: parameter 'name' required
+		if (isPost() && parameterIsMissing("name")) {
+			response.setStatus(SC_BAD_REQUEST);
+			render(new JSONObject()
+				.put("message", "Parameter 'name' is required")
+				.put("status", SC_BAD_REQUEST));
 			return;
 		}
-		if ("POST".equals(request.getMethod())) {
+		if (isPost()) {
 			todoLists.add(request.getParameter("name"));
 			response.sendRedirect(request.getRequestURI());
 			return;
@@ -33,8 +38,20 @@ public class TodoListsResource extends Resource {
 		
 		JSONObject json = new JSONObject();
 		json.put("myLists", todoLists);
-		response.setContentType("application/json");
-		response.getWriter().write(json.toString(2));
+		render(json);
 	}
+
+	private void render(JSONObject json) throws IOException {
+	    response.setContentType("application/json");
+	    response.getWriter().write(json.toString(2));
+    }
+
+	private boolean parameterIsMissing(String parameterName) {
+	    return null == request.getParameter(parameterName) || request.getParameter(parameterName).isEmpty();
+    }
+
+	private boolean isPost() {
+	    return "POST".equals(request.getMethod());
+    }
 
 }
