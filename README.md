@@ -19,8 +19,8 @@ Then observe the application at http://localhost:8080/
 
 # Popolare la todo-list
 
-POST /todolists/123/items
-text=Compra il latte
+    POST /todolists/123/items
+    text=Compra il latte
 
 ...deve creare un nuovo elemento all'interno della TODO LIST che ha id=123
 
@@ -61,8 +61,8 @@ Deve restituire
 
 # Check and uncheck
 
-POST /todolists/0/items/0
-checked=true
+    POST /todolists/0/items/0
+    checked=true
 
 ...deve modificare lo status di checked/unchecked del Todo Item specificato nella url.
 
