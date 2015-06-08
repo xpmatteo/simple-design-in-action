@@ -22,13 +22,63 @@ Then observe the application at http://localhost:8080/
 POST /todolists/123/items
 text=Compra il latte
 
-deve creare un nuovo elemento all'interno della TODO LIST che ha id=123
+...deve creare un nuovo elemento all'interno della TODO LIST che ha id=123
+
+Per testare: crea una nuova lista con
+
+    curl -i -d name=Prova http://localhost:8080/todolists
+
+Poi crea alcuni todo-items con
+
+    curl -i -d text='Compra il latte' http://localhost:8080/todolists/0/items
+    curl -i -d text='Compra il giornale' http://localhost:8080/todolists/0/items
+
+E quindi verifica che funzioni con
+
+    curl -i http://localhost/todolists/0
+
+Deve restituire
+
+    HTTP/1.1 200 OK
+
+    {
+      "name": "Prova",
+      "items": [
+        {
+          "text": "Compra il latte",
+          "status": "unchecked",
+          "uri": "/todolists/0/items/0"
+        },
+        {
+          "text": "Compra il giornale",
+          "status": "unchecked",
+          "uri": "/todolists/0/items/1"
+        },
+      ]
+    }
 
 
 
 # Check and uncheck
 
-POST /todoitems/456
+POST /todolists/0/items/0
 checked=true
 
-deve modificare lo status di checked/unchecked del Todo Item che ha id=456
+...deve modificare lo status di checked/unchecked del Todo Item specificato nella url.
+
+Verifica che funzioni con `curl -i http://localhost/todolists/0`.  Deve restituire
+
+    HTTP/1.1 200 OK
+
+    {
+      "name": "Prova",
+      "items": [
+        {
+          "text": "Compra il latte",
+          "status": "checked",
+          "uri": "/todolists/0/items/0"
+        },
+      ]
+    }
+
+(Nota che adesso lo status è "checked").
