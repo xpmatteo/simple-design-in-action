@@ -24,7 +24,7 @@ public class TodoListsServlet extends HttpServlet {
 		if ("/".equals(request.getRequestURI())) {
 			return new HelloWorldResource(response);
 		}
-		if ("/todolists".equals(request.getRequestURI())) {
+		if (request.getRequestURI().startsWith("/todolists")) {
 			return new TodoListsResource(request, response, todoLists);
 		}
 	    return new Notfound(response);

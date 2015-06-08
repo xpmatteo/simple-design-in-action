@@ -5,6 +5,7 @@ import static javax.servlet.http.HttpServletResponse.*;
 
 import java.io.*;
 import java.util.*;
+import java.util.regex.*;
 
 import javax.servlet.http.*;
 
@@ -34,6 +35,20 @@ public class TodoListsResource extends Resource {
 		if (isPost()) {
 			todoLists.add(request.getParameter("name"));
 			response.sendRedirect(request.getRequestURI());
+			return;
+		}
+		
+		Pattern pattern = Pattern.compile("/todolists/(\\d+)");
+		Matcher matcher = pattern.matcher(request.getRequestURI());
+		if (matcher.matches()) {
+			System.out.println("SI HO RICOMPILATO");
+			String idAsString = matcher.group(1);
+			Integer id = Integer.valueOf(idAsString);
+
+			JSONObject json = new JSONObject();
+			json.put("name", todoLists.get(id));
+			json.put("items", emptyList());
+			render(json);
 			return;
 		}
 		
