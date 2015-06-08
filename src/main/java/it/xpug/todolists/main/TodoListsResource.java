@@ -1,5 +1,6 @@
 package it.xpug.todolists.main;
 
+import static java.util.Collections.*;
 import static javax.servlet.http.HttpServletResponse.*;
 
 import java.io.*;
@@ -37,7 +38,13 @@ public class TodoListsResource extends Resource {
 		}
 		
 		JSONObject json = new JSONObject();
-		json.put("myLists", todoLists);
+		json.put("myLists", emptyList());
+		for (int i=0; i < todoLists.size(); i++) {
+			String uri = String.format("/todolists/%d", i);
+			String name = todoLists.get(i);
+			JSONObject list = new JSONObject().put("name", name).put("uri", uri);
+			json.append("myLists", list);
+		}
 		render(json);
 	}
 
