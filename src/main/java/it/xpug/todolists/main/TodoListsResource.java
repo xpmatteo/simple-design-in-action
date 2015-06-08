@@ -55,7 +55,6 @@ public class TodoListsResource extends Resource {
 
 	private void respondWithTodoList(Integer id) throws IOException {
 	    if (id >= todoLists.size()) {
-	    	System.out.println("NON TROVAI");
 	    	notFound();
 	    	return;
 	    }
