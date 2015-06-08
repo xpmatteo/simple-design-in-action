@@ -1,0 +1,60 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Todo Lists!</title>
+  </head>
+  <body>
+    <p id='error' hidden></p>
+    <h1>My Lists</h1>
+    <a id='new-list-link' href='#'>Create a new list</a>
+    <form id='new-list-form' hidden>
+      <input type='text' name='name' id='new-list-name'>
+      <input type='submit' value='Create this list'>
+        or <a id='new-list-cancel' href='#'>Cancel</a>
+    </form>
+
+    <h2>My Lists</h2>
+    <ul id='my-lists'>
+      <li>
+        <a href="#">Cose da imparare per la lezione 7</a>
+        <span class='how-many-remaining'>&mdash; 3 left</span>
+      </li>
+    </ul>
+    <script src='/scripts/lib/jquery-1.10.2.min.js'></script>
+    <script>
+    $(document).ready(function() {
+      populate_my_lists();
+      $('#new-list-link').click(function() {
+        $('#new-list-form').show(200);
+      });
+      $('#new-list-cancel').click(function() {
+        $('#new-list-form').hide(200);
+      });
+    });
+
+    function populate_my_lists() {
+      $.ajax({
+        url: '/todolists',
+        success: on_populate_my_lists_success,
+        error: on_error,
+      });
+    }
+
+    function on_error(data) {
+      console.log(JSON.stringify(data, null, 2));
+      $('#error').text("Gosh: " + data.statusText).show();
+    }
+
+    function on_populate_my_lists_success(data) {
+      var myLists = data.myLists;
+      for (var i=0; i<myLists.length; i++) {
+        var name = myLists[i].name;
+        var uri = myLists[i].uri;
+        var html = "<li><a href='#' data-uri='" + uri + "'>" + name + "</a></li>";
+        $('#my-lists').append(html);
+      }
+    }
+    </script>
+  </body>
+</html>
