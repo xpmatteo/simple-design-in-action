@@ -1,5 +1,6 @@
 package it.xpug.todolists.main;
 
+import static java.lang.Integer.*;
 import static java.util.Collections.*;
 import static javax.servlet.http.HttpServletResponse.*;
 
@@ -16,6 +17,7 @@ public class TodoListsResource extends Resource {
 	private List<String> todoLists;
 	private HttpServletResponse response;
 	private HttpServletRequest request;
+	private Matcher matcher;
 
 	public TodoListsResource(HttpServletRequest request, HttpServletResponse response, List<String> todoLists) {
 		this.request = request;
@@ -26,10 +28,7 @@ public class TodoListsResource extends Resource {
 	@Override
 	public void service() throws IOException {
 		if (isPost() && parameterIsMissing("name")) {
-			response.setStatus(SC_BAD_REQUEST);
-			render(new JSONObject()
-				.put("message", "Parameter 'name' is required")
-				.put("status", SC_BAD_REQUEST));
+			respondWith(SC_BAD_REQUEST, "Parameter 'name' is required");
 			return;
 		}
 		if (isPost()) {
@@ -38,21 +37,16 @@ public class TodoListsResource extends Resource {
 			return;
 		}
 		
-		Pattern pattern = Pattern.compile("/todolists/(\\d+)");
-		Matcher matcher = pattern.matcher(request.getRequestURI());
-		if (matcher.matches()) {
-			System.out.println("SI HO RICOMPILATO");
-			String idAsString = matcher.group(1);
-			Integer id = Integer.valueOf(idAsString);
-
-			JSONObject json = new JSONObject();
-			json.put("name", todoLists.get(id));
-			json.put("items", emptyList());
-			render(json);
+		if (uriMatches("/todolists/(\\d+)")) {
+			respondWithTodoList(valueOf(getUriParameter(1)));
 			return;
 		}
 		
-		JSONObject json = new JSONObject();
+		respondWithAllTodoLists();
+	}
+
+	private void respondWithAllTodoLists() throws IOException {
+	    JSONObject json = new JSONObject();
 		json.put("myLists", emptyList());
 		for (int i=0; i < todoLists.size(); i++) {
 			String uri = String.format("/todolists/%d", i);
@@ -61,7 +55,40 @@ public class TodoListsResource extends Resource {
 			json.append("myLists", list);
 		}
 		render(json);
-	}
+    }
+
+	private void respondWithTodoList(Integer id) throws IOException {
+	    if (id >= todoLists.size()) {
+	    	System.out.println("NON TROVAI");
+	    	notFound();
+	    	return;
+	    }
+	    
+	    render(new JSONObject()
+	    	.put("name", todoLists.get(id))
+	    	.put("items", emptyList()));
+    }
+
+	private void respondWith(int status, String message) throws IOException {
+	    response.setStatus(status);
+	    render(new JSONObject()
+	    	.put("message", message)
+	    	.put("status", status));
+    }
+
+	private void notFound() throws IOException {
+		respondWith(SC_NOT_FOUND, "Not found");
+    }
+
+	private String getUriParameter(int position) {
+	    return matcher.group(position);
+    }
+
+	private boolean uriMatches(String regex) {
+		Pattern pattern = Pattern.compile(regex);
+		matcher = pattern.matcher(request.getRequestURI());
+		return matcher.matches();
+    }
 
 	private void render(JSONObject json) throws IOException {
 	    response.setContentType("application/json");
