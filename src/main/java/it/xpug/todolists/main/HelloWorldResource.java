@@ -4,21 +4,18 @@ import java.io.*;
 
 import javax.servlet.http.*;
 
+import org.json.*;
+
 public class HelloWorldResource extends Resource {
-	private HttpServletResponse response;
 
 	public HelloWorldResource(HttpServletResponse response) {
-		this.response = response;
+		super(null, response);
     }
 
 	@Override
 	public void service() throws IOException {
-		response.setContentType("application/json");
-		String json = "{"
-				+ "\"message\": \"Hello, world!\","
-				+ "\"todolists\": \"/todolists\""
-				+ "}";
-		response.getWriter().write(json);
+		render(new JSONObject()
+			.put("message", "Hello, world")
+			.put("todolists", "/todolists"));
 	}
-
 }

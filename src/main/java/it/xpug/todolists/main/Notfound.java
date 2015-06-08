@@ -9,6 +9,7 @@ public class Notfound extends Resource {
 	private HttpServletResponse response;
 
 	public Notfound(HttpServletResponse response) {
+		super(null, response);
 		this.response = response;
     }
 
