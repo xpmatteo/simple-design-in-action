@@ -18,7 +18,6 @@ import org.apache.http.impl.client.*;
 import org.apache.http.message.*;
 import org.json.*;
 import org.junit.*;
-import org.junit.runners.*;
 
 public class TodoListsTest {
 
@@ -42,18 +41,33 @@ public class TodoListsTest {
     }
 
 	@Test
+	public void noTodoLists() throws Exception {
+		get("/todolists");
+
+		assertStatus(200);
+		assertBody("{\"myLists\": []}");
+	}
+
+	@Test
+    public void showListOfTodoLists() throws Exception {
+		// TODO
+    }
+
+	@Test
 	public void parameterNameRequiredForNewList() throws Exception {
 		params.put("name", "");
 		post("/todolists");
+
 		assertStatus(400);
-		assertHeader("content-type", "application/json; charset=ISO-8859-1");
 		assertBody("{\"status\":400, \"message\": \"Parameter 'name' is required\"}");
+		assertEquals("No list has been created", 0, todoLists.size());
 	}
 
 	@Test
 	public void createANewList() throws Exception {
 		params.put("name", "New List");
 		post("/todolists");
+
 		assertStatus(302);
 		assertHeader("location", "http://localhost:8123/todolists/0");
 
@@ -63,11 +77,20 @@ public class TodoListsTest {
 
 	@Test
     public void createATodoItem() throws Exception {
-		todoLists.add(new TodoList("Nome lista"));
-		params.put("text", "Compra il latte");
+		TodoList todoList = new TodoList("Nome lista");
+		todoLists.add(todoList);
 
+		params.put("text", "Compra il latte");
 		post("/todolists/0/items");
+
 		assertStatus(302);
+		assertEquals("{\n" +
+				"  \"name\": \"Nome lista\",\n" +
+				"  \"items\": [{\n" +
+				"    \"text\": \"Compra il latte\",\n" +
+				"    \"status\": \"unchecked\"\n" +
+				"  }]\n" +
+				"}", todoList.toJson().toString(2));
     }
 
 	@Test
@@ -90,16 +113,10 @@ public class TodoListsTest {
 				"}");
     }
 
-	@Test
-	public void noTodoLists() throws Exception {
-		get("/todolists");
-		assertStatus(200);
-		assertHeader("content-type", "application/json; charset=ISO-8859-1");
-		assertBody("{\"myLists\": []}");
-	}
 
 
 	protected void assertBody(String expectedBody) throws IllegalStateException, IOException {
+		assertHeader("content-type", "application/json; charset=ISO-8859-1");
 		byte[] bytes = new byte[10000];
 		int bytesRead = response.getEntity().getContent().read(bytes);
 		String body = new String(bytes, 0, bytesRead, Charset.forName("UTF-8"));
