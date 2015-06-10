@@ -16,69 +16,34 @@ Then observe the application at http://localhost:8080/
 
 ## ESERCIZI LEZIONE 8
 
+# Scrivere un semplice test
 
-# Popolare la todo-list
+... che verifica che se provo a create una lista con nome null, ottengo 400.
 
-    POST /todolists/123/items
-    text=Compra il latte
+(Nota che c'e' gia' un test simile per nome vuoto.  Null e' un caso diverso.)
 
-...deve creare un nuovo elemento all'interno della TODO LIST che ha id=123
+# Testare due todo items
 
-Per testare: crea una nuova lista con
+Abbiamo un test che verifica come viene restituita una lista con un item.
 
-    curl -i -d name=Prova http://localhost:8080/todolists
-
-Poi crea alcuni todo-items con
-
-    curl -i -d text='Compra il latte' http://localhost:8080/todolists/0/items
-    curl -i -d text='Compra il giornale' http://localhost:8080/todolists/0/items
-
-E quindi verifica che funzioni con
-
-    curl -i http://localhost/todolists/0
-
-Deve restituire
-
-    HTTP/1.1 200 OK
-
-    {
-      "name": "Prova",
-      "items": [
-        {
-          "text": "Compra il latte",
-          "status": "unchecked",
-          "uri": "/todolists/0/items/0"
-        },
-        {
-          "text": "Compra il giornale",
-          "status": "unchecked",
-          "uri": "/todolists/0/items/1"
-        },
-      ]
-    }
+Modifica il test per creare due items e verificare che la uri del
+secondo item sia corretta.
 
 
-
-# Check and uncheck
+# Testare il checked-unchecked
 
     POST /todolists/0/items/0
     checked=true
 
 ...deve modificare lo status di checked/unchecked del Todo Item specificato nella url.
 
-Verifica che funzioni con `curl -i http://localhost/todolists/0`.  Deve restituire
+Scrivi i seguenti test:
 
-    HTTP/1.1 200 OK
+ - Data una lista con due todo item, se faccio post su `POST /todolists/0/items/1`
+   con il parametro checked=true, allora il secondo item cambia stato a checked
 
-    {
-      "name": "Prova",
-      "items": [
-        {
-          "text": "Compra il latte",
-          "status": "checked",
-          "uri": "/todolists/0/items/0"
-        },
-      ]
-    }
+ - Come il precedente, passando da checked a unchecked
 
-(Nota che adesso lo status è "checked").
+ - Prova che se cerco di mettere a "checked" un item che e' gia' in stato checked,
+   il risultato non cambia.
+
