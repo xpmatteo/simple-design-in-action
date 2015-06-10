@@ -14,7 +14,7 @@ In Eclipse, right-click on the it.xpug.lezione6.main.Main class and select Debug
 
 Then observe the application at http://localhost:8080/
 
-## ESERCIZI LEZIONE 7
+## ESERCIZI LEZIONE 8
 
 
 # Popolare la todo-list

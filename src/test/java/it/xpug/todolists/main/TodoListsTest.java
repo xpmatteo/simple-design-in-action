@@ -22,11 +22,23 @@ import org.junit.*;
 
 public class TodoListsTest {
 
+	private static ReusableJettyApp app = new ReusableJettyApp(new TodoListsServlet());
+
+	@BeforeClass
+	public static void startApplication() throws Exception {
+		app.start(8123, "../hangman-server/src/main/webapp");
+	}
+
+	@AfterClass
+	public static void shutdownApplication() throws Exception {
+		app.shutdown();
+	}
+
 	@Test
-	public void listOfLists() throws Exception {
+	public void noTodoLists() throws Exception {
 		get("/todolists");
 		assertStatus(200);
-		assertMimeType("application/json; charset=ISO-8859-1");
+		assertHeader("content-type", "application/json; charset=ISO-8859-1");
 		assertBody("{\"myLists\": []}");
 	}
 
@@ -79,7 +91,7 @@ public class TodoListsTest {
 	}
 
 	protected String baseUrl() {
-		return "http://localhost:" + APPLICATION_PORT;
+		return "http://localhost:" + 8123;
 	}
 
 	protected String queryString() {
@@ -102,18 +114,6 @@ public class TodoListsTest {
 		request.setEntity(new UrlEncodedFormEntity(parameters));
 	}
 
-	@BeforeClass
-	public static void startApplication() throws Exception {
-		app.start(APPLICATION_PORT, "../hangman-server/src/main/webapp");
-	}
-
-	@AfterClass
-	public static void shutdownApplication() throws Exception {
-		app.shutdown();
-	}
-
-	private static final int APPLICATION_PORT = 8123;
-	private static ReusableJettyApp app = new ReusableJettyApp(new TodoListsServlet());
 	private HttpResponse response;
 	private Map<String, String> params = new HashMap<String, String>();
 }
