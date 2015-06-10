@@ -18,7 +18,7 @@ import org.apache.http.impl.client.*;
 import org.apache.http.message.*;
 import org.json.*;
 import org.junit.*;
-
+import org.junit.runners.*;
 
 public class TodoListsTest {
 
@@ -38,6 +38,7 @@ public class TodoListsTest {
 	@Before
 	public void clearTodoLists() {
 		todoLists.clear();
+		params.clear();
     }
 
 	@Test

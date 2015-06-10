@@ -22,6 +22,12 @@ Then observe the application at http://localhost:8080/
 
 (Nota che c'e' gia' un test simile per nome vuoto.  Null e' un caso diverso.)
 
+# Testare la url /todolists
+
+Nel caso in cui ci sia una todolist, il JSON generato non e' corretto.  Scrivere il test,
+e poi correggere il difetto.
+
+
 # Testare due todo items
 
 Abbiamo un test che verifica come viene restituita una lista con un item.
