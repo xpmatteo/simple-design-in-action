@@ -22,7 +22,7 @@ import org.junit.*;
 
 public class TodoListsTest {
 
-	private static List<String> todoLists = new ArrayList<>();
+	private static List<TodoList> todoLists = new ArrayList<>();
 	private static ReusableJettyApp app = new ReusableJettyApp(new TodoListsServlet(todoLists));
 
 	@BeforeClass
@@ -57,8 +57,37 @@ public class TodoListsTest {
 		assertHeader("location", "http://localhost:8123/todolists/0");
 
 		assertEquals(1, todoLists.size());
-		assertEquals("New List", todoLists.get(0));
+		assertEquals("New List", todoLists.get(0).getName());
 	}
+
+	@Test
+    public void createATodoItem() throws Exception {
+		todoLists.add(new TodoList("Nome lista"));
+		params.put("text", "Compra il latte");
+
+		post("/todolists/0/items");
+		assertStatus(302);
+    }
+
+	@Test
+    public void showListWithItems() throws Exception {
+		TodoList list = new TodoList("Nome lista");
+		list.addItem("Compra il latte");
+		todoLists.add(list);
+
+		get("/todolists/0");
+
+		assertBody("{\n" +
+				"  \"name\": \"Nome lista\",\n" +
+				"  \"items\": [\n" +
+				"    {\n" +
+				"      \"text\": \"Compra il latte\",\n" +
+				"      \"status\": \"unchecked\",\n" +
+				"      \"uri\": \"/todolists/0/items/0\"\n" +
+				"    }\n" +
+				"  ]\n" +
+				"}");
+    }
 
 	@Test
 	public void noTodoLists() throws Exception {
@@ -73,7 +102,9 @@ public class TodoListsTest {
 		byte[] bytes = new byte[10000];
 		int bytesRead = response.getEntity().getContent().read(bytes);
 		String body = new String(bytes, 0, bytesRead, Charset.forName("UTF-8"));
-		assertEquals("Body",  new JSONObject(expectedBody).toString(), new JSONObject(body).toString());
+		String expected = new JSONObject(expectedBody).toString(2);
+		String actual = new JSONObject(body).toString(2);
+		assertEquals("Body",  expected, actual);
 	}
 
 	protected void assertMimeType(String expectedMimeType) {

@@ -14,9 +14,9 @@ import org.json.*;
 
 public class TodoListsResource extends Resource {
 
-	private List<String> todoLists;
+	private List<TodoList> todoLists;
 
-	public TodoListsResource(HttpServletRequest request, HttpServletResponse response, List<String> todoLists) {
+	public TodoListsResource(HttpServletRequest request, HttpServletResponse response, List<TodoList> todoLists) {
 		super(request, response);
 		this.todoLists = todoLists;
     }
@@ -29,7 +29,7 @@ public class TodoListsResource extends Resource {
 		}
 		if (isPost()) {
 			synchronized (todoLists) {
-				todoLists.add(request.getParameter("name"));
+				todoLists.add(new TodoList(request.getParameter("name")));
 				response.sendRedirect("/todolists/" + (todoLists.size()-1));
             }
 			return;
@@ -55,13 +55,17 @@ public class TodoListsResource extends Resource {
 		render(json);
     }
 
-	private void respondWithTodoList(Integer id) throws IOException {
-	    if (id >= todoLists.size()) {
+	private void respondWithTodoList(Integer todoListId) throws IOException {
+	    if (todoListId >= todoLists.size()) {
 	    	notFound();
 	    	return;
 	    }
-	    render(new JSONObject()
-	    	.put("name", todoLists.get(id))
-	    	.put("items", emptyList()));
+		JSONObject json = todoLists.get(todoListId).toJson();
+		JSONArray items = (JSONArray) json.get("items");
+		for (int itemId=0; itemId<items.length(); itemId++) {
+			JSONObject todoItem = (JSONObject) items.get(itemId);
+			todoItem.put("uri", format("/todolists/%d/items/%d", todoListId, itemId));
+		}
+		render(json);
     }
 }

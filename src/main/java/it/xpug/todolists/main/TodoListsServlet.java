@@ -8,9 +8,9 @@ import javax.servlet.http.*;
 
 public class TodoListsServlet extends HttpServlet {
 
-	private List<String> todoLists;
+	private List<TodoList> todoLists;
 
-	public TodoListsServlet(List<String> todoLists) {
+	public TodoListsServlet(List<TodoList> todoLists) {
 		this.todoLists = todoLists;
     }
 
@@ -23,11 +23,14 @@ public class TodoListsServlet extends HttpServlet {
 	}
 
 	private Resource getResource(HttpServletRequest request, HttpServletResponse response) {
+		if (request.getRequestURI().matches("/todolists/\\d+/items")) {
+			return new TodoItemsResource(request, response, todoLists);
+		}
+		if (request.getRequestURI().matches("/todolists(/\\d+)?")) {
+			return new TodoListsResource(request, response, todoLists);
+		}
 		if ("/".equals(request.getRequestURI())) {
 			return new HelloWorldResource(response);
-		}
-		if (request.getRequestURI().startsWith("/todolists")) {
-			return new TodoListsResource(request, response, todoLists);
 		}
 	    return new Notfound(response);
     }
