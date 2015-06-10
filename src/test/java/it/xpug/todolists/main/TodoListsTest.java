@@ -22,16 +22,42 @@ import org.junit.*;
 
 public class TodoListsTest {
 
-	private static ReusableJettyApp app = new ReusableJettyApp(new TodoListsServlet());
+	private static List<String> todoLists = new ArrayList<>();
+	private static ReusableJettyApp app = new ReusableJettyApp(new TodoListsServlet(todoLists));
 
 	@BeforeClass
 	public static void startApplication() throws Exception {
-		app.start(8123, "../hangman-server/src/main/webapp");
+		app.start(8123, "src/main/webapp");
 	}
 
 	@AfterClass
 	public static void shutdownApplication() throws Exception {
 		app.shutdown();
+	}
+
+	@Before
+	public void clearTodoLists() {
+		todoLists.clear();
+    }
+
+	@Test
+	public void parameterNameRequiredForNewList() throws Exception {
+		params.put("name", "");
+		post("/todolists");
+		assertStatus(400);
+		assertHeader("content-type", "application/json; charset=ISO-8859-1");
+		assertBody("{\"status\":400, \"message\": \"Parameter 'name' is required\"}");
+	}
+
+	@Test
+	public void createANewList() throws Exception {
+		params.put("name", "New List");
+		post("/todolists");
+		assertStatus(302);
+		assertHeader("location", "http://localhost:8123/todolists/0");
+
+		assertEquals(1, todoLists.size());
+		assertEquals("New List", todoLists.get(0));
 	}
 
 	@Test
@@ -41,6 +67,7 @@ public class TodoListsTest {
 		assertHeader("content-type", "application/json; charset=ISO-8859-1");
 		assertBody("{\"myLists\": []}");
 	}
+
 
 	protected void assertBody(String expectedBody) throws IllegalStateException, IOException {
 		byte[] bytes = new byte[10000];

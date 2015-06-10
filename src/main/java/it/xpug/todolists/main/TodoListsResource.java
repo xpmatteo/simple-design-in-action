@@ -13,9 +13,9 @@ import javax.servlet.http.*;
 import org.json.*;
 
 public class TodoListsResource extends Resource {
-	
+
 	private List<String> todoLists;
-	
+
 	public TodoListsResource(HttpServletRequest request, HttpServletResponse response, List<String> todoLists) {
 		super(request, response);
 		this.todoLists = todoLists;
@@ -28,16 +28,18 @@ public class TodoListsResource extends Resource {
 			return;
 		}
 		if (isPost()) {
-			todoLists.add(request.getParameter("name"));
-			response.sendRedirect(request.getRequestURI());
+			synchronized (todoLists) {
+				todoLists.add(request.getParameter("name"));
+				response.sendRedirect("/todolists/" + (todoLists.size()-1));
+            }
 			return;
 		}
-		
+
 		if (uriMatches("/todolists/(\\d+)")) {
 			respondWithTodoList(valueOf(getUriParameter(1)));
 			return;
 		}
-		
+
 		respondWithAllTodoLists();
 	}
 

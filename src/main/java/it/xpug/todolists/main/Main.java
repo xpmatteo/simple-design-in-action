@@ -2,6 +2,10 @@ package it.xpug.todolists.main;
 
 
 import static java.lang.Integer.*;
+import static java.util.Collections.*;
+
+import java.util.*;
+
 import it.xpug.toolkit.web.*;
 
 
@@ -12,7 +16,8 @@ public class Main {
 			port = "8080";
 		}
 
-		ReusableJettyApp app = new ReusableJettyApp(new TodoListsServlet());
+		List<String> todoLists = synchronizedList(new ArrayList<String>());
+		ReusableJettyApp app = new ReusableJettyApp(new TodoListsServlet(todoLists));
 		app.start(valueOf(port), "src/main/webapp");
 	}
 }
