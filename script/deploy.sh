@@ -1,3 +1,3 @@
 
 
-git push heroku master
+git push heroku HEAD:master
