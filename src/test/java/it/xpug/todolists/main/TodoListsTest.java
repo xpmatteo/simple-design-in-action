@@ -50,7 +50,15 @@ public class TodoListsTest {
 
 	@Test
     public void showListOfTodoLists() throws Exception {
-		// TODO
+		todoLists.add(new TodoList("e uno"));
+		todoLists.add(new TodoList("e due"));
+
+		get("/todolists");
+
+		assertBody("{\"myLists\": ["
+				+ "{\"name\": \"e uno\", \"uri\": \"/todolists/0\"},"
+				+ "{\"name\": \"e due\", \"uri\": \"/todolists/1\"},"
+				+ "]}");
     }
 
 	@Test

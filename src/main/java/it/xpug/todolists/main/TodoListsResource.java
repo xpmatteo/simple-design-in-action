@@ -48,7 +48,7 @@ public class TodoListsResource extends Resource {
 		json.put("myLists", emptyList());
 		for (int i=0; i < todoLists.size(); i++) {
 			json.append("myLists", new JSONObject()
-				.put("name", todoLists.get(i))
+				.put("name", todoLists.get(i).getName())
 				.put("uri", format("/todolists/%d", i))
 			);
 		}
