@@ -56,4 +56,8 @@ public abstract class Resource {
 	    return "POST".equals(request.getMethod());
 	}
 
+	protected int getUriParameterAsInt(int position) {
+	    return Integer.parseInt(getUriParameter(position));
+	}
+
 }
