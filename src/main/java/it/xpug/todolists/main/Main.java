@@ -16,7 +16,7 @@ public class Main {
 			port = "8080";
 		}
 
-		List<TodoList> todoLists = synchronizedList(new ArrayList<>());
+		List<TodoList> todoLists = synchronizedList(new ArrayList<TodoList>());
 		ReusableJettyApp app = new ReusableJettyApp(new TodoListsServlet(todoLists));
 		app.start(valueOf(port), "src/main/webapp");
 	}
