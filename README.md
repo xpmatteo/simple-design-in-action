@@ -47,9 +47,9 @@ This will ask you to create a digital key if you don't have one already.
 
 Now you will connect your repository for this project, to heroku.  Do this with the command
 
-    git remote add heroku git@heroku.com:XXX
+    heroku git:remote -a aw-todolists-123456
 
-where XXX is your application's URL (see above).  Then you deploy to heroku with
+Then you deploy to heroku with
 
     git push heroku HEAD:master
 
