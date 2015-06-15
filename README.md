@@ -23,9 +23,9 @@ There are many steps and things to learn.  Don't despair if something doesn't wo
 
 First thing: if you deployed this project as a zip file, scrap it and download again using git.  First install git, then use
 
-    git clone https://github.com/xpmatteo/aw-servlet-exercise
-    cd aw-servlet-exercise
-    git checkout lesson-9
+    git clone https://github.com/xpmatteo/aw-servlet-exercises
+    cd aw-servlet-exercises
+    git checkout lesson-9-2015
 
 Check that the application works from the command line.  Execute
 
