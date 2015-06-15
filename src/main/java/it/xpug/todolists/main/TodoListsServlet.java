@@ -23,7 +23,7 @@ public class TodoListsServlet extends HttpServlet {
 	}
 
 	private Resource getResource(HttpServletRequest request, HttpServletResponse response) {
-		if (request.getRequestURI().matches("/todolists/\\d+/items")) {
+		if (request.getRequestURI().matches("/todolists/\\d+/items(/\\d+)?")) {
 			return new TodoItemsResource(request, response, todoLists);
 		}
 		if (request.getRequestURI().matches("/todolists(/\\d+)?")) {

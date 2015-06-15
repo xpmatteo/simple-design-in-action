@@ -18,8 +18,8 @@ public class TodoList {
 	    return name;
     }
 
-	public void addItem(String todoItemText) {
-		todoItems.add(new TodoItem(todoItemText));
+	public void addItem(TodoItem todoItem) {
+		todoItems.add(todoItem);
     }
 
 	public JSONObject toJson() {
@@ -30,6 +30,10 @@ public class TodoList {
 	        result.append("items", todoItem.toJson());
         }
 	    return result;
+    }
+
+	public void checkItem(int todoItemId, boolean checked) {
+		todoItems.get(todoItemId).setChecked(checked);
     }
 
 }

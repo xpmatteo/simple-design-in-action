@@ -1,11 +1,11 @@
 package it.xpug.todolists.main;
 
+import static java.lang.Integer.*;
+
 import java.io.*;
 import java.util.*;
 
 import javax.servlet.http.*;
-
-import org.json.*;
 
 public class TodoItemsResource extends Resource {
 
@@ -19,12 +19,19 @@ public class TodoItemsResource extends Resource {
 	@Override
 	public void service() throws IOException {
 		if (uriMatches("/todolists/(\\d+)/items")) {
-			int todoListId = Integer.parseInt(getUriParameter(1));
+			int todoListId = getUriParameterAsInt(1);
 			TodoList todoList = todoLists.get(todoListId);
-			todoList.addItem(request.getParameter("text"));
+			todoList.addItem(new TodoItem(request.getParameter("text")));
 			response.sendRedirect("/todolists/" + todoListId);
+			return;
 		}
 
+		if (uriMatches("/todolists/(\\d+)/items/(\\d+)")) {
+			int todoListId = getUriParameterAsInt(1);
+			TodoList todoList = todoLists.get(todoListId);
+			todoList.checkItem(getUriParameterAsInt(2), Boolean.valueOf(request.getParameter("checked")));
+			response.sendRedirect("/todolists/" + todoListId);
+			return;
+		}
 	}
-
 }

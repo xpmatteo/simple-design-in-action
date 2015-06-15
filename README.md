@@ -33,7 +33,7 @@ Check that the application works from the command line.  Execute
 
 then open the browser to http://localhost:8080/todolists.
 
-Register yourself to Heroku.  It's free.  Then go to Heroku's dashboard on the web and create an application.  Call it "aw-todo-list-123456" where 123456 is your student ID number.  You will be given your application's URL; you will need it.
+Register yourself to Heroku.  It's free.  Then go to Heroku's dashboard on the web and create an application.  Call it "aw-todolists-123456" where 123456 is your student ID number.  You will be given your application's URL; you will need it.
 
 Download the heroku tools.  There are instructions on Heroku's web site for how to download the correct version for your system (Mac OS or Ubuntu).  If you did it correctly, you should be able to run the
 
@@ -55,7 +55,7 @@ where XXX is your application's URL (see above).  Then you deploy to heroku with
 
 This will take some time.  When it's finished, it will print your application's URL (this is the url for interacting with the app; the other url we used before was the Heroku deployment url.)  It will be something like
 
-    http://aw-todo-list-123456.herokuapp.com/
+    http://aw-todolists-123456.herokuapp.com/
 
 Open it.  It will probably be an error.  This is normal :)  Try to understand what the error is by reading your application's logs with
 

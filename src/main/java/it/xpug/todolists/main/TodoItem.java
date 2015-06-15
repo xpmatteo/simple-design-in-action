@@ -16,4 +16,12 @@ public class TodoItem {
 	    	.put("status", isChecked ? "checked" : "unchecked");
     }
 
+	public boolean isChecked() {
+	    return isChecked;
+    }
+
+	public void setChecked(boolean checked) {
+		isChecked = checked;
+    }
+
 }

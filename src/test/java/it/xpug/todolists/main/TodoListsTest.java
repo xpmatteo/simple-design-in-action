@@ -104,7 +104,7 @@ public class TodoListsTest {
 	@Test
     public void showListWithItems() throws Exception {
 		TodoList list = new TodoList("Nome lista");
-		list.addItem("Compra il latte");
+		list.addItem(new TodoItem("Compra il latte"));
 		todoLists.add(list);
 
 		get("/todolists/0");
@@ -121,6 +121,23 @@ public class TodoListsTest {
 				"}");
     }
 
+	@Test
+    public void checkATodoItem() throws Exception {
+		TodoList list = new TodoList("Nome lista");
+		TodoItem todoItem = new TodoItem("Compra il latte");
+		list.addItem(todoItem);
+		todoLists.add(list);
+
+		params.put("checked", "true");
+		post("/todolists/0/items/0");
+
+		assertTrue("Now it should be checked", todoItem.isChecked());
+
+		params.put("checked", "false");
+		post("/todolists/0/items/0");
+
+		assertFalse("Now it should still be UNchecked", todoItem.isChecked());
+	}
 
 
 	protected void assertBody(String expectedBody) throws IllegalStateException, IOException {
