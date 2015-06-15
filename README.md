@@ -51,7 +51,7 @@ Now you will connect your repository for this project, to heroku.  Do this with 
 
 where XXX is your application's URL (see above).  Then you deploy to heroku with
 
-    git push heroku master
+    git push heroku HEAD:master
 
 This will take some time.  When it's finished, it will print your application's URL (this is the url for interacting with the app; the other url we used before was the Heroku deployment url.)  It will be something like
 
@@ -72,7 +72,7 @@ where "java XXX" should be the command that we used before to run the applicatio
 
 Then deploy again with
 
-    git push heroku master
+    git push heroku HEAD:master
 
 This time it should take less time.  This time the application should work.
 
