@@ -1,3 +1,4 @@
+#!/bin/bash
 
+git push heroku HEAD:master
 
-git push heroku master

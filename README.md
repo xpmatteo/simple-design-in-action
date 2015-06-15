@@ -55,11 +55,11 @@ where XXX is your application's URL (see above).  Then you deploy to heroku with
 
 This will take some time.  When it's finished, it will print your application's URL (this is the url for interacting with the app; the other url we used before was the Heroku deployment url.)  It will be something like
 
-    http://aw-temperature-conversion-123456.herokuapp.com/
+    http://aw-todo-list-123456.herokuapp.com/
 
 Open it.  It will probably be an error.  This is normal :)  Try to understand what the error is by reading your application's logs with
 
-    heroku logs
+    heroku logs -t
 
 The solution is here: there is an error in the Procfile.  This is the file that tells Heroku how it should run our application.  It is of the form
 
@@ -75,10 +75,4 @@ Then deploy again with
     git push heroku master
 
 This time it should take less time.  This time the application should work.
-
-## Exercise 1: make it work
-
-We have the UI in the index.html file, but it does not work.  Your task is to add behaviour in JavaScript so that the index page calls the server with Ajax to perform the temperature unit conversion work.
-
-
 
