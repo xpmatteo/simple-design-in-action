@@ -25,7 +25,7 @@ First thing: if you deployed this project as a zip file, scrap it and download a
 
     git clone https://github.com/xpmatteo/aw-servlet-exercise
     cd aw-servlet-exercise
-    git branch lesson-9
+    git checkout lesson-9
 
 Check that the application works from the command line.  Execute
 
