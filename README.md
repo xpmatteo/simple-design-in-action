@@ -18,3 +18,22 @@ Then observe the application at http://localhost:8080/
 
 
 ## Finish Implementing the TodoListRepository
+
+### 0. Regenerate the project to get the org.postgresql.Driver
+
+    mvn eclipse:clean eclipse:eclipse -DdownloadSources -DdownloadJavadocs
+
+### 1. Run the tests
+
+    mvn clean test
+
+### 2. Run the application
+
+And verify that it is broken at url http://localhost:8080/todolists
+
+[Optional] Add a test for DatabaseTodoListRepository::getAll() in file DatabaseTodoListRepositoryTest
+
+Implement DatabaseTodoListRepository::getAll()
+
+
+
