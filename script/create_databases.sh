@@ -4,7 +4,7 @@
 # loading the schema and the test data
 
 # define key information
-project=????
+project=todolists
 dbpassword="secret"
 
 # no customization needed beyond this line

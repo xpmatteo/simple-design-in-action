@@ -1,15 +1,14 @@
 package it.xpug.todolists.main;
 
 import java.io.*;
-import java.util.*;
 
 import javax.servlet.http.*;
 
 public class TodoItemsResource extends Resource {
 
-	private List<TodoList> todoLists;
+	private TodoListRepository todoLists;
 
-	public TodoItemsResource(HttpServletRequest request, HttpServletResponse response, List<TodoList> todoLists) {
+	public TodoItemsResource(HttpServletRequest request, HttpServletResponse response, TodoListRepository todoLists) {
 	    super(request, response);
 		this.todoLists = todoLists;
     }

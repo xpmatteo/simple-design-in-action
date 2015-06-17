@@ -1,16 +1,15 @@
 package it.xpug.todolists.main;
 
 import java.io.*;
-import java.util.*;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
 
 public class TodoListsServlet extends HttpServlet {
 
-	private List<TodoList> todoLists;
+	private TodoListRepository todoLists;
 
-	public TodoListsServlet(List<TodoList> todoLists) {
+	public TodoListsServlet(TodoListRepository todoLists) {
 		this.todoLists = todoLists;
     }
 

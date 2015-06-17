@@ -21,7 +21,7 @@ import org.junit.*;
 
 public class TodoListsTest {
 
-	private static List<TodoList> todoLists = new ArrayList<>();
+	private static TodoListRepository todoLists = new InMemoryTodoListRepository();
 	private static ReusableJettyApp app = new ReusableJettyApp(new TodoListsServlet(todoLists));
 
 	@BeforeClass

@@ -6,7 +6,6 @@ import static java.util.Collections.*;
 import static javax.servlet.http.HttpServletResponse.*;
 
 import java.io.*;
-import java.util.*;
 
 import javax.servlet.http.*;
 
@@ -14,9 +13,9 @@ import org.json.*;
 
 public class TodoListsResource extends Resource {
 
-	private List<TodoList> todoLists;
+	private TodoListRepository todoLists;
 
-	public TodoListsResource(HttpServletRequest request, HttpServletResponse response, List<TodoList> todoLists) {
+	public TodoListsResource(HttpServletRequest request, HttpServletResponse response, TodoListRepository todoLists) {
 		super(request, response);
 		this.todoLists = todoLists;
     }
@@ -28,10 +27,8 @@ public class TodoListsResource extends Resource {
 			return;
 		}
 		if (isPost()) {
-			synchronized (todoLists) {
-				todoLists.add(new TodoList(request.getParameter("name")));
-				response.sendRedirect("/todolists/" + (todoLists.size()-1));
-            }
+			int newTodoListId = todoLists.add(new TodoList(request.getParameter("name")));
+			response.sendRedirect("/todolists/" + newTodoListId);
 			return;
 		}
 
@@ -46,21 +43,22 @@ public class TodoListsResource extends Resource {
 	private void respondWithAllTodoLists() throws IOException {
 	    JSONObject json = new JSONObject();
 		json.put("myLists", emptyList());
-		for (int i=0; i < todoLists.size(); i++) {
+		for (TodoList todoList : todoLists.getAll()) {
 			json.append("myLists", new JSONObject()
-				.put("name", todoLists.get(i).getName())
-				.put("uri", format("/todolists/%d", i))
+				.put("name", todoList.getName())
+				.put("uri", format("/todolists/%d", todoList.getId()))
 			);
-		}
+        }
 		render(json);
     }
 
 	private void respondWithTodoList(Integer todoListId) throws IOException {
-	    if (todoListId >= todoLists.size()) {
+		TodoList todoList = todoLists.get(todoListId);
+	    if (null == todoList) {
 	    	notFound();
 	    	return;
 	    }
-		JSONObject json = todoLists.get(todoListId).toJson();
+		JSONObject json = todoList.toJson();
 		JSONArray items = (JSONArray) json.get("items");
 		for (int itemId=0; itemId<items.length(); itemId++) {
 			JSONObject todoItem = (JSONObject) items.get(itemId);

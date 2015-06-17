@@ -7,6 +7,7 @@ import java.util.*;
 import org.json.*;
 
 public class TodoList {
+	private int id;
 	private String name;
 	private List<TodoItem> todoItems = new ArrayList<>();
 
@@ -34,6 +35,14 @@ public class TodoList {
 
 	public void checkItem(int todoItemId, boolean checked) {
 		todoItems.get(todoItemId).setChecked(checked);
+    }
+
+	public int getId() {
+	    return id;
+    }
+
+	public void setId(int id) {
+		this.id = id;
     }
 
 }
