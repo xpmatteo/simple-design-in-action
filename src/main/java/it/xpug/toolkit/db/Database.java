@@ -40,6 +40,7 @@ public class Database {
 					result.put(columnName, resultSet.getObject(columnName));
 				}
 			}
+			connection.commit();
 			return result;
 		} catch (Exception e) {
 			throw new RuntimeException(e);
