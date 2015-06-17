@@ -15,6 +15,11 @@ public class TodoList {
 	    this.name = name;
     }
 
+	public TodoList(int todoListId, String name) {
+		id = todoListId;
+		this.name = name;
+    }
+
 	public String getName() {
 	    return name;
     }

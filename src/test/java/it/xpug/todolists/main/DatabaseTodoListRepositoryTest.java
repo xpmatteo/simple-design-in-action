@@ -34,7 +34,11 @@ public class DatabaseTodoListRepositoryTest {
 		TodoList todoListFromRepo = repository.get(id);
 
 		assertEquals("prova", todoListFromRepo.getName());
+		assertEquals(id, todoListFromRepo.getId());
     }
 
-
+	@Test
+    public void notFound() throws Exception {
+	    assertNull("not found", repository.get(9786987));
+    }
 }

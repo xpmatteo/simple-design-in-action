@@ -15,7 +15,10 @@ public class DatabaseTodoListRepository implements TodoListRepository {
 	@Override
 	public TodoList get(int todoListId) {
 		ListOfRows rows = database.select("select * from todo_lists where id = ?", todoListId);
-		return new TodoList((String) rows.get(0).get("name"));
+		if (rows.size() == 0)
+			return null;
+		String name = (String) rows.get(0).get("name");
+		return new TodoList(todoListId, name);
 	}
 
 	@Override
