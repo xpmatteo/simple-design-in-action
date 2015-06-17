@@ -42,7 +42,8 @@ for db in $db_development $db_test; do
 	cat src/main/sql/???_*.sql src/main/sql/seed.sql | psql $db
 
 	# grant all privileges on all tables to our user
-	for table in $(psql -tAc "select relname from pg_stat_user_tables" $db); do
+	sql="select relname from pg_stat_user_tables union select relname from pg_statio_user_sequences"
+	for table in $(psql -tAc "$sql" $db); do
 	  psql -tAc "GRANT ALL PRIVILEGES ON TABLE $table TO $dbuser " $db
 	done
 done
