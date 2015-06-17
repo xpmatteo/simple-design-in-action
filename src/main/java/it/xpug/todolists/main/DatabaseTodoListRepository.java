@@ -14,12 +14,15 @@ public class DatabaseTodoListRepository implements TodoListRepository {
 
 	@Override
 	public TodoList get(int todoListId) {
-		return null;
+		ListOfRows rows = database.select("select * from todo_lists where id = ?", todoListId);
+		return new TodoList((String) rows.get(0).get("name"));
 	}
 
 	@Override
 	public int add(TodoList todoList) {
-		return 0;
+		String sql = "insert into todo_lists (name) values (?) returning id";
+		ListOfRows rows = database.select(sql, todoList.getName());
+		return (int) rows.get(0).get("id");
 	}
 
 	@Override
@@ -29,6 +32,7 @@ public class DatabaseTodoListRepository implements TodoListRepository {
 
 	@Override
 	public void clear() {
+		database.execute("truncate todo_lists");
 	}
 
 	@Override
