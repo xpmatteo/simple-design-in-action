@@ -53,5 +53,9 @@ Implement DatabaseTodoListRepository::getAll()
 
 Verify that http://localhost:8080/todolists now works as before.
 
+### 4. Finish the missing bits
+
+Implement adding new todoitems, and checking/unchecking todoitems.
+
 
 
