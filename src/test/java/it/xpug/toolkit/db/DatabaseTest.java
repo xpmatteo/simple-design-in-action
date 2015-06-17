@@ -21,7 +21,6 @@ public class DatabaseTest {
 		database.execute("create table prova( id serial, name varchar(255) );");
 	}
 
-
 	@Test
 	public void configurationReturnsAConnection() throws Exception {
 		Connection connection = configuration.getConnection();
@@ -30,8 +29,8 @@ public class DatabaseTest {
 
 	@Test
 	public void testSelectSum() throws Exception {
-		String sql = "select 3 + 4";
-		assertEquals(7, database.selectOneValue(sql));
+		String sql = "select ? + ?";
+		assertEquals(7, database.selectOneValue(sql, 3, 4));
 	}
 	
 	@Test(expected=RuntimeException.class)
