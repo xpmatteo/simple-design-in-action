@@ -1,8 +1,16 @@
 package it.xpug.todolists.main;
 
+import it.xpug.toolkit.db.*;
+
 import java.util.*;
 
 public class DatabaseTodoListRepository implements TodoListRepository {
+
+	private Database database;
+
+	public DatabaseTodoListRepository(Database database) {
+		this.database = database;
+	}
 
 	@Override
 	public TodoList get(int todoListId) {
@@ -24,8 +32,8 @@ public class DatabaseTodoListRepository implements TodoListRepository {
 	}
 
 	@Override
-	public int size() {
-		return 0;
+	public long size() {
+		return (long) database.selectOneValue("select count(*) from todo_lists");
 	}
 
 }

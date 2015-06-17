@@ -9,7 +9,7 @@ import org.junit.*;
 
 public class DatabaseTest {
 
-	private static final String TEST_DATABASE_URL = "postgres://todolists:secret@localhost:5432/todolists_test";
+	public static final String TEST_DATABASE_URL = "postgres://todolists:secret@localhost:5432/todolists_test";
 	private DatabaseConfiguration configuration;
 	private Database database;
 

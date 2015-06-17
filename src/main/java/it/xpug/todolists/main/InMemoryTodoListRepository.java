@@ -32,7 +32,7 @@ public class InMemoryTodoListRepository implements TodoListRepository {
     }
 
 	@Override
-    public int size() {
+    public long size() {
 	    return todoLists.size();
     }
 

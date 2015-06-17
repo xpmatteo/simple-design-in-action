@@ -12,6 +12,6 @@ public interface TodoListRepository {
 
 	void clear();
 
-	int size();
+	long size();
 
 }
