@@ -1,7 +1,5 @@
 package it.xpug.todolists.main;
 
-import static java.lang.Integer.*;
-
 import java.io.*;
 import java.util.*;
 
