@@ -36,7 +36,28 @@
       $('#new-list-link').click(show_new_list_form);
       $('#new-list-cancel').click(hide_new_list_form);
       $('#error').click(hide_error);
+      $('#new-list-form').submit(create_new_list);
     });
+
+    function create_new_list() {
+      show_my_lists_spinner();
+      $.ajax({
+        url: '/todolists',
+        method: 'POST',
+        success: on_create_new_list_success,
+        error: on_error,
+        data: {
+          name: $('#new-list-name').val()
+        },
+      });
+      return false;
+    }
+
+    function on_create_new_list_success() {
+      $('#new-list-name').val("");
+      hide_new_list_form();
+      populate_my_lists();
+    }
 
     function hide_error() {
       $('#error').hide(200);
