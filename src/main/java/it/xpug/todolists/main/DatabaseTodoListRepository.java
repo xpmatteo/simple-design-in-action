@@ -20,7 +20,15 @@ public class DatabaseTodoListRepository implements TodoListRepository {
 		String name = (String) rows.get(0).get("name");
 		TodoList todoList = new TodoList(todoListId, name);
 
-		// TODO aggiungi tutti i suoi todoitem
+		String sql = "select * from todo_items where todo_list_id = ?";
+		for (Map<String, Object> row : database.select(sql, todoListId)) {
+			String text = (String) row.get("text");
+			int todoItemId = (int) row.get("id");
+			boolean isChecked = (boolean) row.get("checked");
+			TodoItem todoItem = new TodoItem(todoItemId, text);
+			todoItem.setChecked(isChecked);
+			todoList.addItem(todoItem);
+        }
 
 		return todoList;
 	}

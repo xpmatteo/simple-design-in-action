@@ -65,14 +65,19 @@ public class DatabaseTodoListRepositoryTest {
 	@Test
     public void updateListWithNewTodoItem() throws Exception {
 	    TodoList todoList = new TodoList("zero");
-		int todolistId = repository.add(todoList);
+		int todoListId = repository.add(todoList);
+		todoList.setId(todoListId);
 
 		TodoItem todoItem = new TodoItem("pippo");
+		todoItem.setChecked(true);
 		todoList.addItem(todoItem);
 
 		repository.update(todoList);
 
-		TodoList foundList = repository.get(todolistId);
-		assertEquals(1, foundList.getItems().size());
+		TodoList foundList = repository.get(todoListId);
+		List<TodoItem> todoItems = foundList.getItems();
+		assertEquals(1, todoItems.size());
+		assertEquals("pippo", todoItems.get(0).getText());
+		assertEquals(true, todoItems.get(0).isChecked());
     }
 }

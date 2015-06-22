@@ -11,6 +11,11 @@ public class TodoItem {
 	    this.text = text;
     }
 
+	public TodoItem(int todoItemId, String text) {
+		id = todoItemId;
+		this.text = text;
+    }
+
 	public JSONObject toJson() {
 	    return new JSONObject()
 	    	.put("text", text)
