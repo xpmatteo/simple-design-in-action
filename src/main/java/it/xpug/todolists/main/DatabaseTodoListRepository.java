@@ -18,7 +18,11 @@ public class DatabaseTodoListRepository implements TodoListRepository {
 		if (rows.size() == 0)
 			return null;
 		String name = (String) rows.get(0).get("name");
-		return new TodoList(todoListId, name);
+		TodoList todoList = new TodoList(todoListId, name);
+
+		// aggiungi tutti i suoi todoitem
+
+		return todoList;
 	}
 
 	@Override
@@ -60,6 +64,8 @@ public class DatabaseTodoListRepository implements TodoListRepository {
 						+ "(?, ?, ?)";
 				database.execute(sql, todoList.getId(), todoItem.getText(), todoItem.isChecked());
 			}
+
+			// TODO else update the todoitem...
         }
     }
 
