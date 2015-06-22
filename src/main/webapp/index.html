@@ -3,10 +3,19 @@
   <head>
     <meta charset="UTF-8">
     <title>Todo Lists!</title>
+    <style type="text/css" media="screen">
+      #error {
+        color: black;
+        background: pink;
+        border-radius: 25px;
+        border: 2px solid red;
+        padding: 20px;
+      }
+    </style>
   </head>
   <body>
+    <h1>Todo Lists!</h1>
     <p id='error' hidden></p>
-    <h1>My Lists</h1>
     <a id='new-list-link' href='#'>Create a new list</a>
     <form id='new-list-form' hidden>
       <input type='text' name='name' id='new-list-name'>
@@ -21,17 +30,27 @@
         <span class='how-many-remaining'>&mdash; 3 left</span>
       </li>
     </ul>
+
     <script src='/scripts/lib/jquery-1.10.2.min.js'></script>
     <script>
     $(document).ready(function() {
       populate_my_lists();
-      $('#new-list-link').click(function() {
-        $('#new-list-form').show(200);
-      });
-      $('#new-list-cancel').click(function() {
-        $('#new-list-form').hide(200);
-      });
+      $('#new-list-link').click(show_new_list_form);
+      $('#new-list-cancel').click(hide_new_list_form);
+      $('#error').click(hide_error);
     });
+
+    function hide_error() {
+      $('#error').hide(200); 
+    }
+
+    function show_new_list_form() {
+      $('#new-list-form').show(200);
+    }
+
+    function hide_new_list_form() {
+      $('#new-list-form').hide(200);
+    }
 
     function populate_my_lists() {
       $.ajax({
@@ -43,7 +62,10 @@
 
     function on_error(data) {
       console.log(JSON.stringify(data, null, 2));
-      $('#error').text("Gosh: " + data.statusText).show();
+      var message = data.statusText;
+      if (typeof data.responseJSON !== 'undefined')
+        message += ': ' + data.responseJSON.message;
+      $('#error').text(message).show();
     }
 
     function on_populate_my_lists_success(data) {
