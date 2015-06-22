@@ -20,7 +20,7 @@ public class DatabaseTodoListRepository implements TodoListRepository {
 		String name = (String) rows.get(0).get("name");
 		TodoList todoList = new TodoList(todoListId, name);
 
-		// aggiungi tutti i suoi todoitem
+		// TODO aggiungi tutti i suoi todoitem
 
 		return todoList;
 	}
@@ -58,10 +58,8 @@ public class DatabaseTodoListRepository implements TodoListRepository {
     public void update(TodoList todoList) {
 		for (TodoItem todoItem : todoList.getItems()) {
 			if (todoItem.getId() == null) {
-				String sql = "insert into todo_items "
-						+ "(todo_list_id, text, checked)"
-						+ "values"
-						+ "(?, ?, ?)";
+				String sql = "insert into todo_items (todo_list_id, text, checked)"
+						+ "values (?, ?, ?)";
 				database.execute(sql, todoList.getId(), todoItem.getText(), todoItem.isChecked());
 			}
 
