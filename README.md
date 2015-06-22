@@ -14,48 +14,18 @@ In Eclipse, right-click on the it.xpug.lezione6.main.Main class and select Debug
 
 Then observe the application at http://localhost:8080/
 
-## ESERCIZI LEZIONE 10
+## ESERCIZI LEZIONE 11
 
 
 ## Finish Implementing the TodoListRepository
 
-### -1. Install Postgresql
 
-On Debian/Ubuntu:
-
-    sudo apt-get install postgresql
-
-On Mac:
-
-    brew install postgresql
-
-### 0. Regenerate the project to get the org.postgresql.Driver
-
-    mvn eclipse:clean eclipse:eclipse -DdownloadSources -DdownloadJavadocs
-
-### 1. Create the databases
-
-    script/create_databases.sh
-
-### 2. Run the tests
+### 0. Run the tests
 
     mvn clean test
 
-They should pass.  If they don't, you probably forgot to do step 1.
+One test fails.  Fix it.
 
-### 3. Run the application
+### 1. Implement the creation of new todoitems
 
-And verify that it is broken at url http://localhost:8080/todolists
-
-[Optional] Add a test for DatabaseTodoListRepository::getAll() in file DatabaseTodoListRepositoryTest
-
-Implement DatabaseTodoListRepository::getAll()
-
-Verify that http://localhost:8080/todolists now works as before.
-
-### 4. Finish the missing bits
-
-Implement adding new todoitems, and checking/unchecking todoitems.
-
-
-
+Add the necessary UI code to create new todoitems
