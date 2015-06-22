@@ -2,7 +2,7 @@ package it.xpug.toolkit.db;
 
 import java.util.*;
 
-public class ListOfRows {
+public class ListOfRows implements Iterable<Map<String, Object>> {
 	private List<Map<String, Object>> rows = new ArrayList<Map<String,Object>>();
 	private HashMap<String, Object> currentRow;
 
@@ -22,5 +22,10 @@ public class ListOfRows {
 	public Map<String, Object> get(int rowIndex) {
 		return rows.get(rowIndex);
 	}
-	
+
+	@Override
+    public Iterator<Map<String, Object>> iterator() {
+	    return rows.iterator();
+    }
+
 }

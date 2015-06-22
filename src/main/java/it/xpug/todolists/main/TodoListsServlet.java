@@ -16,10 +16,19 @@ public class TodoListsServlet extends HttpServlet {
 	@Override
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("Serving: " + request.getMethod() + " " + request.getRequestURI());
+		delay();
 
 		Resource resource = getResource(request, response);
 		resource.service();
 	}
+
+	private void delay() {
+	    try {
+	        Thread.sleep(1000);
+        } catch (InterruptedException e) {
+	        throw new RuntimeException(e);
+        }
+    }
 
 	private Resource getResource(HttpServletRequest request, HttpServletResponse response) {
 		if (request.getRequestURI().matches("/todolists/\\d+/items(/\\d+)?")) {

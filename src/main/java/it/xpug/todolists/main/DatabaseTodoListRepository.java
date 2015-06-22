@@ -30,7 +30,14 @@ public class DatabaseTodoListRepository implements TodoListRepository {
 
 	@Override
 	public List<TodoList> getAll() {
-		return null;
+		List<TodoList> result = new ArrayList<TodoList>();
+		ListOfRows rows = database.select("select * from todo_lists order by id");
+		for (Map<String, Object> row : rows) {
+			String name = (String) row.get("name");
+			int id = (int) row.get("id");
+			result.add(new TodoList(id, name));
+        }
+		return result;
 	}
 
 	@Override

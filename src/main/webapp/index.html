@@ -26,11 +26,8 @@
 
     <h2>My Lists</h2>
     <ul id='my-lists'>
-      <li>
-        <a href="#">Cose da imparare per la lezione 7</a>
-        <span class='how-many-remaining'>&mdash; 3 left</span>
-      </li>
     </ul>
+    <img id='my-lists-spinner' src='/images/spinner.gif' alt='' hidden>
 
     <script src='/scripts/lib/jquery-1.10.2.min.js'></script>
     <script>
@@ -42,7 +39,7 @@
     });
 
     function hide_error() {
-      $('#error').hide(200); 
+      $('#error').hide(200);
     }
 
     function show_new_list_form() {
@@ -53,7 +50,16 @@
       $('#new-list-form').hide(200);
     }
 
+    function show_my_lists_spinner() {
+      $('#my-lists-spinner').show();
+    }
+
+    function hide_my_lists_spinner() {
+      $('#my-lists-spinner').hide();
+    }
+
     function populate_my_lists() {
+      show_my_lists_spinner();
       $.ajax({
         url: '/todolists',
         success: on_populate_my_lists_success,
@@ -67,10 +73,13 @@
       if (typeof data.responseJSON !== 'undefined')
         message += ': ' + data.responseJSON.message;
       $('#error').text(message).show();
+      hide_my_lists_spinner();
     }
 
     function on_populate_my_lists_success(data) {
+      hide_my_lists_spinner();
       var myLists = data.myLists;
+      $('#my-lists').html("");
       for (var i=0; i<myLists.length; i++) {
         var name = myLists[i].name;
         var uri = myLists[i].uri;
