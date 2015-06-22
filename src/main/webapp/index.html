@@ -17,17 +17,31 @@
   <body>
     <h1>Todo Lists!</h1>
     <p id='error' hidden></p>
-    <a id='new-list-link' href='#'>Create a new list</a>
-    <form id='new-list-form' hidden>
-      <input type='text' name='name' id='new-list-name'>
-      <input type='submit' value='Create this list'>
-        or <a id='new-list-cancel' href='#'>Cancel</a>
-    </form>
 
-    <h2>My Lists</h2>
-    <ul id='my-lists'>
-    </ul>
-    <img id='my-lists-spinner' src='/images/spinner.gif' alt='' hidden>
+    <section id='my-lists-section'>
+      <a id='new-list-link' href='#'>Create a new list</a>
+      <form id='new-list-form' hidden>
+        <input type='text' name='name' id='new-list-name'>
+        <input type='submit' value='Create this list'>
+          or <a id='new-list-cancel' href='#'>Cancel</a>
+      </form>
+
+      <h2>My Lists</h2>
+      <ul id='my-lists'>
+      </ul>
+      <img id='my-lists-spinner' src='/images/spinner.gif' alt='' hidden>
+    </section>
+
+    <section id='one-list-section' hidden>
+      <h2>NOME DELLA LISTA</h2>
+      <ul id='todo-items-unchecked'>
+        <li>pippo</li>
+      </ul>
+
+      <ul id='todo-items-checked'>
+        <li>pluto</li>
+      </ul>
+    </section>
 
     <script src='/scripts/lib/jquery-1.10.2.min.js'></script>
     <script>
@@ -38,6 +52,19 @@
       $('#error').click(hide_error);
       $('#new-list-form').submit(create_new_list);
     });
+
+    function on_error(data) {
+      console.log(JSON.stringify(data, null, 2));
+      var message = data.statusText;
+      if (typeof data.responseJSON !== 'undefined')
+        message += ': ' + data.responseJSON.message;
+      $('#error').text(message).show();
+      hide_my_lists_spinner();
+    }
+
+    function hide_error() {
+      $('#error').hide(200);
+    }
 
     function create_new_list() {
       show_my_lists_spinner();
@@ -57,10 +84,6 @@
       $('#new-list-name').val("");
       hide_new_list_form();
       populate_my_lists();
-    }
-
-    function hide_error() {
-      $('#error').hide(200);
     }
 
     function show_new_list_form() {
@@ -88,15 +111,6 @@
       });
     }
 
-    function on_error(data) {
-      console.log(JSON.stringify(data, null, 2));
-      var message = data.statusText;
-      if (typeof data.responseJSON !== 'undefined')
-        message += ': ' + data.responseJSON.message;
-      $('#error').text(message).show();
-      hide_my_lists_spinner();
-    }
-
     function on_populate_my_lists_success(data) {
       hide_my_lists_spinner();
       var myLists = data.myLists;
@@ -104,9 +118,26 @@
       for (var i=0; i<myLists.length; i++) {
         var name = myLists[i].name;
         var uri = myLists[i].uri;
-        var html = "<li><a href='#' data-uri='" + uri + "'>" + name + "</a></li>";
+        var html = "<li><a href='#' class='todolist' data-uri='" + uri + "'>" + name + "</a></li>";
         $('#my-lists').append(html);
+        $('a.todolist').click(open_todolist);
       }
+    }
+
+    function open_todolist() {
+      show_my_lists_spinner();
+      $.ajax({
+        url: $(this).attr('data-uri'),
+        success: on_open_todolist_success,
+        error: on_error,
+      });
+    }
+
+    function on_open_todolist_success(data) {
+      hide_my_lists_spinner();
+      $('#my-lists-section').hide();
+      $('#one-list-section').show();
+      $('#one-list-section h2').text(data.name);
     }
     </script>
   </body>
