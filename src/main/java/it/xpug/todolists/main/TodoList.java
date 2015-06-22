@@ -50,4 +50,8 @@ public class TodoList {
 		this.id = id;
     }
 
+	public List<TodoItem> getItems() {
+	    return new ArrayList<TodoItem>(todoItems);
+    }
+
 }

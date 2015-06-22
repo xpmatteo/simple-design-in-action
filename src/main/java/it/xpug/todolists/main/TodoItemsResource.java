@@ -19,6 +19,7 @@ public class TodoItemsResource extends Resource {
 			int todoListId = getUriParameterAsInt(1);
 			TodoList todoList = todoLists.get(todoListId);
 			todoList.addItem(new TodoItem(request.getParameter("text")));
+			todoLists.update(todoList);
 			response.sendRedirect("/todolists/" + todoListId);
 			return;
 		}

@@ -16,7 +16,7 @@ public class TodoListsServlet extends HttpServlet {
 	@Override
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("Serving: " + request.getMethod() + " " + request.getRequestURI());
-		delay();
+		//delay();
 
 		Resource resource = getResource(request, response);
 		resource.service();

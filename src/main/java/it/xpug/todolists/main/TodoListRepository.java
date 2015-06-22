@@ -14,4 +14,6 @@ public interface TodoListRepository {
 
 	long size();
 
+	void update(TodoList todoList);
+
 }

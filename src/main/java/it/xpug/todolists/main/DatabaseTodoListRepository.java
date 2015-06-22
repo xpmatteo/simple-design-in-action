@@ -50,4 +50,17 @@ public class DatabaseTodoListRepository implements TodoListRepository {
 		return (long) database.selectOneValue("select count(*) from todo_lists");
 	}
 
+	@Override
+    public void update(TodoList todoList) {
+		for (TodoItem todoItem : todoList.getItems()) {
+			if (todoItem.getId() == null) {
+				String sql = "insert into todo_items "
+						+ "(todo_list_id, text, checked)"
+						+ "values"
+						+ "(?, ?, ?)";
+				database.execute(sql, todoList.getId(), todoItem.getText(), todoItem.isChecked());
+			}
+        }
+    }
+
 }
