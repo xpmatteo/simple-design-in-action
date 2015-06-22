@@ -29,3 +29,7 @@ One test fails.  Fix it.
 ### 1. Implement the creation of new todoitems
 
 Add the necessary UI code to create new todoitems
+
+### 2. Implement checking and unchecking todoItems
+
+You must add both server-side and UI-side code.
