@@ -29,7 +29,9 @@ public class DatabaseTodoListRepository implements TodoListRepository {
 	public int add(TodoList todoList) {
 		String sql = "insert into todo_lists (name) values (?) returning id";
 		ListOfRows rows = database.select(sql, todoList.getName());
-		return (int) rows.get(0).get("id");
+		int id = (int) rows.get(0).get("id");
+		todoList.setId(id);
+		return id;
 	}
 
 	@Override

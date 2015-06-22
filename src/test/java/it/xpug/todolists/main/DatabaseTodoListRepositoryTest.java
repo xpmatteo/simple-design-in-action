@@ -25,8 +25,11 @@ public class DatabaseTodoListRepositoryTest {
 
 	@Test
     public void insertOneElement() throws Exception {
-	    repository.add(new TodoList("prova"));
+	    TodoList todoList = new TodoList("prova");
+		int newId = repository.add(todoList);
+
 		assertEquals("repo now contains 1", 1, repository.size());
+		assertEquals(newId, todoList.getId());
     }
 
 	@Test
