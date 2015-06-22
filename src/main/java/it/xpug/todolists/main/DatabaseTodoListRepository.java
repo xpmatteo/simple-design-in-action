@@ -25,9 +25,7 @@ public class DatabaseTodoListRepository implements TodoListRepository {
 			String text = (String) row.get("text");
 			int todoItemId = (int) row.get("id");
 			boolean isChecked = (boolean) row.get("checked");
-			TodoItem todoItem = new TodoItem(todoItemId, text);
-			todoItem.setChecked(isChecked);
-			todoList.addItem(todoItem);
+			todoList.addItem(new TodoItem(todoItemId, text, isChecked));
         }
 
 		return todoList;

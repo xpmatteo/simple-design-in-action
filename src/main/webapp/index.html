@@ -143,7 +143,24 @@
       $('#my-lists-section').hide();
       $('#one-list-section').show();
       $('#one-list-section h2').text(data.name);
+      $('#todo-items-unchecked').html("");
+      $('#todo-items-checked').html("");
+      for (var i=0; i<data.items.length; i++) {
+        var text = data.items[i].text;
+        var uri = data.items[i].uri;
+        var is_checked = data.items[i].status == "checked";
+        var checked_attr = is_checked? "checked" : "";
+        var html = "<li><input type='checkbox' " + checked_attr +" class='todoitem'  data-uri='" + uri + "'> " + text + "</li>";
+        $('#todo-items-unchecked').append(html);
+        $('.todoitem').click(toggle_check);
+      }
     }
+
+    function toggle_check() {
+      // call Ajax to update the status
+      // then reload the todolist
+    }
+
     </script>
   </body>
 </html>

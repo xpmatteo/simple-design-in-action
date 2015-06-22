@@ -16,6 +16,12 @@ public class TodoItem {
 		this.text = text;
     }
 
+	public TodoItem(int todoItemId, String text, boolean isChecked) {
+		id = todoItemId;
+		this.text = text;
+		this.isChecked = isChecked;
+    }
+
 	public JSONObject toJson() {
 	    return new JSONObject()
 	    	.put("text", text)
