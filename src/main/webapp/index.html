@@ -127,20 +127,20 @@
       for (var i=0; i<myLists.length; i++) {
         var name = myLists[i].name;
         var uri = myLists[i].uri;
-        var html = "<li><a href='#' class='todolist' data-uri='" + uri + "'>" + name + "</a></li>";
+        var html = "<li><a href='#' class='todo-list' data-uri='" + uri + "'>" + name + "</a></li>";
         $('#my-lists').append(html);
-        $('a.todolist').click(open_todolist);
+        $('a.todo-list').click(open_todo_list);
       }
     }
 
     var current_todo_list_uri;
 
-    function open_todolist() {
+    function open_todo_list() {
       current_todo_list_uri = $(this).attr('data-uri');
-      do_open_todolist();
+      do_open_todo_list();
     }
 
-    function do_open_todolist() {
+    function do_open_todo_list() {
       show_my_lists_spinner();
       $.ajax({
         url: current_todo_list_uri,
@@ -162,9 +162,9 @@
         var uri = data.items[i].uri;
         var is_checked = data.items[i].status == "checked";
         var checked_attr = is_checked? "checked" : "";
-        var html = "<li><input type='checkbox' " + checked_attr +" class='todoitem'  data-uri='" + uri + "'> " + text + "</li>";
+        var html = "<li><input type='checkbox' " + checked_attr +" class='todo-item'  data-uri='" + uri + "'> " + text + "</li>";
         $('#todo-items-unchecked').append(html);
-        $('.todoitem').click(toggle_check);
+        $('.todo-item').click(toggle_check);
       }
     }
 
@@ -172,7 +172,7 @@
       $.ajax({
         url: current_todo_list_uri + '/items',
         method: 'POST',
-        success: do_open_todolist,
+        success: do_open_todo_list,
         error: on_error,
         data: {
           text: $('#new-todo-item-text').val()
@@ -183,7 +183,7 @@
 
     function toggle_check() {
       // call Ajax to update the status
-      // then reload the todolist
+      // then reload the todo_list
     }
 
     </script>
