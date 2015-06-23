@@ -12,10 +12,13 @@
         padding: 20px;
         box-shadow: 5px 5px 2px #888888;
       }
+      #todo-items-unchecked, #todo-items-checked {
+        list-style: none;
+      }
     </style>
   </head>
   <body>
-    <h1>Todo Lists!</h1>
+    <h1><a href='/'>Todo Lists!</a></h1>
     <p id='error' hidden></p>
 
     <section id='my-lists-section'>
@@ -37,8 +40,8 @@
         <li>pippo</li>
       </ul>
 
-      <form id='new-list-form'>
-        <input type='text' name='text' id='new-todoitem-text' >
+      <form id='new-todo-item-form'>
+        <input type='text' name='text' id='new-todo-item-text' >
         <br>
         <input type='submit' value='Add this item'>
       </form>
@@ -56,6 +59,7 @@
       $('#new-list-cancel').click(hide_new_list_form);
       $('#error').click(hide_error);
       $('#new-list-form').submit(create_new_list);
+      $('#new-todo-item-form').submit(create_new_todo_item);
     });
 
     function on_error(data) {
@@ -129,16 +133,24 @@
       }
     }
 
+    var current_todo_list_uri;
+
     function open_todolist() {
-      show_my_lists_spinner();
-      $.ajax({
-        url: $(this).attr('data-uri'),
-        success: on_open_todolist_success,
-        error: on_error,
-      });
+      current_todo_list_uri = $(this).attr('data-uri');
+      do_open_todolist();
     }
 
-    function on_open_todolist_success(data) {
+    function do_open_todolist() {
+      show_my_lists_spinner();
+      $.ajax({
+        url: current_todo_list_uri,
+        success: on_open_todo_list_success,
+        error: on_error,
+      });
+      $('#new-todo-item-text').val('');
+    }
+
+    function on_open_todo_list_success(data) {
       hide_my_lists_spinner();
       $('#my-lists-section').hide();
       $('#one-list-section').show();
@@ -154,6 +166,19 @@
         $('#todo-items-unchecked').append(html);
         $('.todoitem').click(toggle_check);
       }
+    }
+
+    function create_new_todo_item() {
+      $.ajax({
+        url: current_todo_list_uri + '/items',
+        method: 'POST',
+        success: do_open_todolist,
+        error: on_error,
+        data: {
+          text: $('#new-todo-item-text').val()
+        },
+      });
+      return false;
     }
 
     function toggle_check() {
