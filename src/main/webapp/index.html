@@ -140,7 +140,7 @@
       var template = $('#my-lists-template').html();
       var html = Mustache.render(template, {my_lists: data.myLists});
       $('#my-lists').html(html);
-      $('a.todolist').click(open_todolist);
+      $('a.todolist').click(open_todo_list);
     }
 
     var current_todo_list_uri;
