@@ -15,12 +15,13 @@ public class Main {
 			port = "8080";
 		}
 
-		//		TodoListRepository todoLists = new InMemoryTodoListRepository();
+		InMemorySessionRepository sessionRepository = new InMemorySessionRepository();
+		AuthenticationFilter authenticationFilter = new AuthenticationFilter(sessionRepository);
 
 		DatabaseConfiguration configuration = new DatabaseConfiguration(DATABASE_URL);
 		Database database = new Database(configuration);
 		TodoListRepository todoLists = new DatabaseTodoListRepository(database);
-		ReusableJettyApp app = new ReusableJettyApp(new TodoListsServlet(todoLists));
+		ReusableJettyApp app = new ReusableJettyApp(new TodoListsServlet(todoLists, authenticationFilter));
 		app.start(valueOf(port), "src/main/webapp");
 	}
 }

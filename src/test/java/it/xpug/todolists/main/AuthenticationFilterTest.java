@@ -11,6 +11,7 @@ public class AuthenticationFilterTest {
 
 	InMemorySessionRepository sessionRepository = new InMemorySessionRepository();
 	AuthenticationFilter filter = new AuthenticationFilter(sessionRepository);
+	TodoListSession session = new TodoListSession("1234", null);
 
 	@Test
 	public void accessWithoutCookie() {
@@ -21,8 +22,7 @@ public class AuthenticationFilterTest {
 
 	@Test
     public void accessWithInvalidCookie() throws Exception {
-		TodoListSession session = new TodoListSession();
-		sessionRepository.put("1234", session);
+		sessionRepository.add(session);
 
 		Cookie cookie = new Cookie(AuthenticationFilter.SESSION_COOKIE, "4567");
 		assertEquals("session not found", null, filter.getSession(new Cookie[] {cookie}));
@@ -30,8 +30,7 @@ public class AuthenticationFilterTest {
 
 	@Test
     public void accessWithValidCookie() throws Exception {
-		TodoListSession session = new TodoListSession();
-		sessionRepository.put("1234", session);
+		sessionRepository.add(session);
 
 		Cookie cookie = new Cookie(AuthenticationFilter.SESSION_COOKIE, "1234");
 		assertEquals(session, filter.getSession(new Cookie[] {cookie}));

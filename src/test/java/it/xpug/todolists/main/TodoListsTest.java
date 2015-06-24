@@ -21,8 +21,16 @@ import org.junit.*;
 
 public class TodoListsTest {
 
+	private static InMemoryUserRepository users = new InMemoryUserRepository();
+	private static InMemorySessionRepository sessions = new InMemorySessionRepository();
 	private static TodoListRepository todoLists = new InMemoryTodoListRepository();
-	private static ReusableJettyApp app = new ReusableJettyApp(new TodoListsServlet(todoLists));
+	private static AuthenticationFilter filter = new AuthenticationFilter(sessions);
+	private static ReusableJettyApp app = new ReusableJettyApp(new TodoListsServlet(todoLists, filter));
+
+	@BeforeClass
+	public static void addUser() throws Exception {
+		users.add(new User("User Name", "user@email"), "password");
+	}
 
 	@BeforeClass
 	public static void startApplication() throws Exception {
@@ -34,11 +42,29 @@ public class TodoListsTest {
 		app.shutdown();
 	}
 
+	private TodoListSession session;
+
 	@Before
 	public void clearTodoLists() {
 		todoLists.clear();
 		params.clear();
     }
+
+	@Before
+	public void loginAsUser() {
+		String sessionId = sessions.newSessionId();
+		this.session = new TodoListSession(sessionId, null);
+		sessions.add(session);
+	}
+
+	@Test
+	public void notAuthenticated() throws Exception {
+		this.session = null;
+		get("/todolists");
+
+		assertStatus(403);
+		assertBody("{\"message\": \"Please authenticate\", \"status\": 403}");
+	}
 
 	@Test
 	public void noTodoLists() throws Exception {
@@ -168,22 +194,24 @@ public class TodoListsTest {
 		assertEquals("Status code", expectedStatus, response.getStatusLine().getStatusCode());
 	}
 
-	protected void get(String path, String authentication) throws IOException, URISyntaxException {
-		URI url = new URI(baseUrl() + path + queryString());
-		HttpGet request = new HttpGet(url);
-		this.response = makeHttpClient().execute(request);
-	}
-
 	protected void get(String path) throws IOException, URISyntaxException {
 		URI url = new URI(baseUrl() + path + queryString());
 		HttpGet request = new HttpGet(url);
+		addCookie(request);
 		this.response = makeHttpClient().execute(request);
 	}
+
+	private void addCookie(HttpRequestBase request) {
+	    if (this.session != null) {
+			request.addHeader("Cookie", "todolists_session_id=" + session.getId());
+		}
+    }
 
 	protected void post(String path) throws URISyntaxException, ClientProtocolException, IOException {
 		URI url = new URI(baseUrl() + path);
 		HttpPost request = new HttpPost(url);
 		addParameters(request);
+		addCookie(request);
 		this.response = makeHttpClient().execute(request);
 	}
 

@@ -8,9 +8,11 @@ import javax.servlet.http.*;
 public class TodoListsServlet extends HttpServlet {
 
 	private TodoListRepository todoLists;
+	private AuthenticationFilter authenticationFilter;
 
-	public TodoListsServlet(TodoListRepository todoLists) {
+	public TodoListsServlet(TodoListRepository todoLists, AuthenticationFilter authenticationFilter) {
 		this.todoLists = todoLists;
+		this.authenticationFilter = authenticationFilter;
     }
 
 	@Override
@@ -22,7 +24,7 @@ public class TodoListsServlet extends HttpServlet {
 		resource.service();
 	}
 
-	private void delay() {
+	protected void delay() {
 	    try {
 	        Thread.sleep(1000);
         } catch (InterruptedException e) {
@@ -31,6 +33,11 @@ public class TodoListsServlet extends HttpServlet {
     }
 
 	private Resource getResource(HttpServletRequest request, HttpServletResponse response) {
+		TodoListSession session = authenticationFilter.getSession(request.getCookies());
+		if (null == session) {
+			return new NotAuthorized(response);
+		}
+
 		if (request.getRequestURI().matches("/todolists/\\d+/items(/\\d+)?")) {
 			return new TodoItemsResource(request, response, todoLists);
 		}

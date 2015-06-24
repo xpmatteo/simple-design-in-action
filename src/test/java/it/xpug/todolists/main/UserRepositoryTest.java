@@ -16,4 +16,5 @@ public class UserRepositoryTest {
 	    assertEquals("wrong email", null, repository.authenticate("wrong email", "password"));
 	    assertEquals(user, repository.authenticate("matteo@matteo.com", "password"));
     }
+
 }
