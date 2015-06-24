@@ -9,7 +9,7 @@ import org.junit.*;
 
 public class AuthenticationFilterTest {
 
-	SessionRepository sessionRepository = new SessionRepository();
+	InMemorySessionRepository sessionRepository = new InMemorySessionRepository();
 	AuthenticationFilter filter = new AuthenticationFilter(sessionRepository);
 
 	@Test

@@ -5,9 +5,9 @@ import javax.servlet.http.*;
 public class AuthenticationFilter {
 	public static final String SESSION_COOKIE = "todolists_session_id";
 
-	private SessionRepository sessionRepository;
+	private InMemorySessionRepository sessionRepository;
 
-	public AuthenticationFilter(SessionRepository sessionRepository) {
+	public AuthenticationFilter(InMemorySessionRepository sessionRepository) {
 		this.sessionRepository = sessionRepository;
     }
 
