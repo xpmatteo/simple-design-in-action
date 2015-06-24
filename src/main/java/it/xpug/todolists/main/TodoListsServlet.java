@@ -38,6 +38,9 @@ public class TodoListsServlet extends HttpServlet {
 		if (request.getRequestURI().matches("/login")) {
 			return new LoginResource(request, response, sessions);
 		}
+		if (request.getRequestURI().matches("/register")) {
+			return new LoginResource(request, response, sessions);
+		}
 
 		TodoListSession session = authenticationFilter.getSession(request.getCookies());
 		if (null == session) {

@@ -17,7 +17,7 @@ public class AuthenticationFilter {
 		for (int i = 0; i < cookies.length; i++) {
 	        Cookie cookie = cookies[i];
 	        if (cookie.getName().equals(SESSION_COOKIE)) {
-	    	    return sessionRepository.get(cookie.getValue());
+	    	    		return sessionRepository.get(cookie.getValue());
 	        }
         }
 	    return null;
