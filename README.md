@@ -14,22 +14,24 @@ In Eclipse, right-click on the it.xpug.lezione6.main.Main class and select Debug
 
 Then observe the application at http://localhost:8080/
 
-## ESERCIZI LEZIONE 11
+## EXERCISES FOR LESSON 12
 
 
-## Finish Implementing the TodoListRepository
+### 0. Pass the login screen
 
+The server knows only one hardcoded user.  Its email is "x@x.com" and its name is "x".  Add JavaScript code so that the login form
 
-### 0. Run the tests
+  - sends the credentials to the server
+  - if the credentials are accepted, it hides the login form and shows the "my lists" page
+  - otherwise, it shows an error message and keeps asking for valid credentials
 
-    mvn clean test
+### 1. Implement a database-backed user repository
 
-One test fails.  Fix it.
+  - The tests of the DatabaseUserRepositoryTest are failing.  Make them pass!
+  - Remember, never save the cleartext password in the database.  You may use SHA256 to encrypt it.
 
-### 1. Implement the creation of new todoitems
+### 2. Use the DatabaseUserRepositoryTest in the LoginResource
 
-Add the necessary UI code to create new todoitems
+  - The LoginResource knows a single, hardcoded user.  This is not satisfactory!  Change it to use the DatabaseUserRepository to look up users.
+  - We don't have a registration form yet, but we don't need it to make progress.  You can save a few test users in the database directly.
 
-### 2. Implement checking and unchecking todoItems
-
-You must add both server-side and UI-side code.
