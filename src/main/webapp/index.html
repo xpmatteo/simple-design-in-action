@@ -22,6 +22,7 @@
     <p id='error' hidden></p>
 
     <section id='login-section'>
+      <h2>Login</h2>
       <form id='login-form'>
         <p>Email: <input type='text' id='login-email'></p>
         <p>Password: <input type='text' id='login-password'></p>
@@ -39,7 +40,7 @@
       </form>
 
       <ul id='my-lists'></ul>
-      <script id='my-lists-template' type='x-tmpl-mustache'>
+      <script id='my-lists-template' type='application/x-tmpl-mustache'>
         {{#my_lists}}
         <li><a href='#' class='todolist' data-uri='{{ uri }}'>{{ name }}</a></li>
         {{/my_lists}}
