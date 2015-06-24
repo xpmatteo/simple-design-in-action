@@ -39,6 +39,11 @@
       </form>
 
       <ul id='my-lists'></ul>
+      <script id='my-lists-template' type='x-tmpl-mustache'>
+        {{#my_lists}}
+        <li><a href='#' class='todolist' data-uri='{{ uri }}'>{{ name }}</a></li>
+        {{/my_lists}}
+      </script>
       <img id='my-lists-spinner' src='/images/spinner.gif' alt='' hidden>
     </section>
 
@@ -59,18 +64,12 @@
       </ul>
     </section>
 
-    <script id='my-lists-template' type='x-tmpl-mustache'>
-      {{#my_lists}}
-      <li><a href='#' class='todolist' data-uri='{{ uri }}'>{{ name }}</a></li>
-      {{/my_lists}}
-    </script>
 
     <script src='/scripts/lib/jquery-1.10.2.min.js'></script>
     <script src='/scripts/lib/mustache.js'></script>
 
     <script>
     $(document).ready(function() {
-      populate_my_lists();
       $('#new-list-link').click(show_new_list_form);
       $('#new-list-cancel').click(hide_new_list_form);
       $('#error').click(hide_error);
