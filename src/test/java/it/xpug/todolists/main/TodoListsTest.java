@@ -24,8 +24,7 @@ public class TodoListsTest {
 	private static InMemoryUserRepository users = new InMemoryUserRepository();
 	private static InMemorySessionRepository sessions = new InMemorySessionRepository();
 	private static TodoListRepository todoLists = new InMemoryTodoListRepository();
-	private static AuthenticationFilter filter = new AuthenticationFilter(sessions);
-	private static ReusableJettyApp app = new ReusableJettyApp(new TodoListsServlet(todoLists, filter));
+	private static ReusableJettyApp app = new ReusableJettyApp(new TodoListsServlet(todoLists, sessions));
 
 	@BeforeClass
 	public static void addUser() throws Exception {

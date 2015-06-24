@@ -9,10 +9,12 @@ public class TodoListsServlet extends HttpServlet {
 
 	private TodoListRepository todoLists;
 	private AuthenticationFilter authenticationFilter;
+	private SessionRepository sessions;
 
-	public TodoListsServlet(TodoListRepository todoLists, AuthenticationFilter authenticationFilter) {
+	public TodoListsServlet(TodoListRepository todoLists, SessionRepository sessions) {
 		this.todoLists = todoLists;
-		this.authenticationFilter = authenticationFilter;
+		this.sessions = sessions;
+		this.authenticationFilter = new AuthenticationFilter(sessions);
     }
 
 	@Override
@@ -33,6 +35,10 @@ public class TodoListsServlet extends HttpServlet {
     }
 
 	private Resource getResource(HttpServletRequest request, HttpServletResponse response) {
+		if (request.getRequestURI().matches("/login")) {
+			return new LoginResource(request, response, sessions);
+		}
+
 		TodoListSession session = authenticationFilter.getSession(request.getCookies());
 		if (null == session) {
 			return new NotAuthorized(response);

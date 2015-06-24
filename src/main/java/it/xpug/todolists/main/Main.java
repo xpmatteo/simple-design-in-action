@@ -16,12 +16,13 @@ public class Main {
 		}
 
 		InMemorySessionRepository sessionRepository = new InMemorySessionRepository();
-		AuthenticationFilter authenticationFilter = new AuthenticationFilter(sessionRepository);
 
 		DatabaseConfiguration configuration = new DatabaseConfiguration(DATABASE_URL);
 		Database database = new Database(configuration);
 		TodoListRepository todoLists = new DatabaseTodoListRepository(database);
-		ReusableJettyApp app = new ReusableJettyApp(new TodoListsServlet(todoLists, authenticationFilter));
+
+		ReusableJettyApp app = new ReusableJettyApp(new TodoListsServlet(todoLists, sessionRepository));
+
 		app.start(valueOf(port), "src/main/webapp");
 	}
 }

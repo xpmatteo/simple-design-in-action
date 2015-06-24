@@ -5,10 +5,10 @@ import javax.servlet.http.*;
 public class AuthenticationFilter {
 	public static final String SESSION_COOKIE = "todolists_session_id";
 
-	private InMemorySessionRepository sessionRepository;
+	private SessionRepository sessionRepository;
 
-	public AuthenticationFilter(InMemorySessionRepository sessionRepository) {
-		this.sessionRepository = sessionRepository;
+	public AuthenticationFilter(SessionRepository sessions) {
+		this.sessionRepository = sessions;
     }
 
 	public TodoListSession getSession(Cookie[] cookies) {
