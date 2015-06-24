@@ -59,7 +59,15 @@
       </ul>
     </section>
 
+    <script id='my-lists-template' type='x-tmpl-mustache'>
+      {{#my_lists}}
+      <li><a href='#' class='todolist' data-uri='{{ uri }}'>{{ name }}</a></li>
+      {{/my_lists}}
+    </script>
+
     <script src='/scripts/lib/jquery-1.10.2.min.js'></script>
+    <script src='/scripts/lib/mustache.js'></script>
+
     <script>
     $(document).ready(function() {
       populate_my_lists();
@@ -130,15 +138,10 @@
 
     function on_populate_my_lists_success(data) {
       hide_my_lists_spinner();
-      var myLists = data.myLists;
-      $('#my-lists').html("");
-      for (var i=0; i<myLists.length; i++) {
-        var name = myLists[i].name;
-        var uri = myLists[i].uri;
-        var html = "<li><a href='#' class='todo-list' data-uri='" + uri + "'>" + name + "</a></li>";
-        $('#my-lists').append(html);
-        $('a.todo-list').click(open_todo_list);
-      }
+      var template = $('#my-lists-template').html();
+      var html = Mustache.render(template, {my_lists: data.myLists});
+      $('#my-lists').html(html);
+      $('a.todolist').click(open_todolist);
     }
 
     var current_todo_list_uri;
