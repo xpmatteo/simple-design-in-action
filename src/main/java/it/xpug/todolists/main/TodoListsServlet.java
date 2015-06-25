@@ -44,7 +44,7 @@ public class TodoListsServlet extends HttpServlet {
 
 		TodoListSession session = authenticationFilter.getSession(request.getCookies());
 		if (null == session) {
-			return new NotAuthorized(response);
+//			return new NotAuthorized(response);
 		}
 
 		if (request.getRequestURI().matches("/todolists/\\d+/items(/\\d+)?")) {

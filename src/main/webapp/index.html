@@ -44,9 +44,9 @@
     </section>
 
     <script id='my-lists-template' type='application/x-tmpl-mustache'>
-      {{#my_lists}}
-      <li><a href='#' class='todolist' data-uri='{{ uri }}'>{{ name }}</a></li>
-      {{/my_lists}}
+      {{#myLists}}
+      <li><a href='#' class='todo-list' data-uri='{{ uri }}'>{{ name }}</a></li>
+      {{/myLists}}
     </script>
 
     <section id='one-list-section' hidden>
@@ -140,9 +140,9 @@
     function on_populate_my_lists_success(data) {
       hide_my_lists_spinner();
       var template = $('#my-lists-template').html();
-      var html = Mustache.render(template, {my_lists: data.myLists});
+      var html = Mustache.render(template, data);
       $('#my-lists').html(html);
-      $('a.todolist').click(open_todo_list);
+      $('a.todo-list').click(open_todo_list);
     }
 
     var current_todo_list_uri;
