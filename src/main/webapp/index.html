@@ -140,6 +140,7 @@
     function on_populate_my_lists_success(data) {
       hide_my_lists_spinner();
       var template = $('#my-lists-template').html();
+      <!-- Usiamo un template per evitare vulnerabilita' cross-site-scripting -->
       var html = Mustache.render(template, data);
       $('#my-lists').html(html);
       $('a.todo-list').click(open_todo_list);
@@ -169,6 +170,12 @@
       $('#one-list-section h2').text(data.name);
       $('#todo-items-unchecked').html("");
       $('#todo-items-checked').html("");
+      <!-- 
+      
+        Occhio!  Qui abbiamo una vulnerabilita' cross-site-scripting. Meglio usare un template
+        come abbiamo fatto piu' sopra
+
+      -->
       for (var i=0; i<data.items.length; i++) {
         var text = data.items[i].text;
         var uri = data.items[i].uri;
