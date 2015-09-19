@@ -2,9 +2,9 @@ package it.xpug.woodysmart.main;
 
 
 
+import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.*;
 import it.xpug.toolkit.web.*;
-import it.xpug.woodysmart.main.*;
 
 import java.io.*;
 import java.net.*;
@@ -40,23 +40,34 @@ public class WoodysMartTest {
     }
 
 	@Test
-	public void notAuthenticated() throws Exception {
-		get("/todolists");
+	public void notFound() throws Exception {
+		get("/notexistent");
 
-		assertStatus(403);
-		assertBody("{\"message\": \"Please authenticate\", \"status\": 403}");
+		assertStatus(404);
+	}
+
+	@Test
+	public void index() throws Exception {
+		get("/");
+
+		assertStatus(200);
+		assertThat(responseBody(), containsString("Welcome to Woody's Mart!"));
 	}
 
 
 	protected void assertBody(String expectedBody) throws IllegalStateException, IOException {
-		assertHeader("content-type", "application/json; charset=ISO-8859-1");
-		byte[] bytes = new byte[10000];
-		int bytesRead = response.getEntity().getContent().read(bytes);
-		String body = new String(bytes, 0, bytesRead, Charset.forName("UTF-8"));
+		String body = responseBody();
 		String expected = new JSONObject(expectedBody).toString(2);
 		String actual = new JSONObject(body).toString(2);
 		assertEquals("Body",  expected, actual);
 	}
+
+	private String responseBody() throws IOException {
+	    byte[] bytes = new byte[10000];
+		int bytesRead = response.getEntity().getContent().read(bytes);
+		String body = new String(bytes, 0, bytesRead, Charset.forName("UTF-8"));
+	    return body;
+    }
 
 	protected void assertMimeType(String expectedMimeType) {
 		assertHeader("content-type", expectedMimeType);
