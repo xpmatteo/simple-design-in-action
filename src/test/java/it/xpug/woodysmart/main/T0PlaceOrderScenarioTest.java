@@ -11,7 +11,7 @@ import javax.servlet.http.*;
 
 import org.junit.*;
 
-public class PlaceOrderScenarioTest {
+public class T0PlaceOrderScenarioTest {
 	FakeWriter writer = FakeWriter.create();
 	HttpServletRequest request = mock(HttpServletRequest.class);
 	HttpServletResponse response = aMockResponse(writer);
@@ -31,12 +31,14 @@ public class PlaceOrderScenarioTest {
 		new WoodysMartServlet().service(request, response);
 
 		verify(response).setStatus(200);
+// UNCOMMENT THESE ONE BY ONE
 //		verify(response).setContentType("text/html");
 //		assertThat(writer.getWrittenText(), containsString("Order Code: 6789"));
 //		assertThat(writer.getWrittenText(), containsString("Article Code: ABCD"));
 //		assertThat(writer.getWrittenText(), containsString("Address: 123 Main St"));
     }
 
+	// UNIGNORE THIS AFTER THE OTHER ONE PASSES
 	@Test@Ignore
     public void receiveAndShowAnotherOrder() throws Exception {
 		when(request.getParameter("order_code")).thenReturn("7777");
