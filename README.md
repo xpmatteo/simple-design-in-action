@@ -1,4 +1,6 @@
-## Import the project in Eclipse
+## Import the project in Eclipse (the manual way)
+
+## Import the project in Eclipse (with maven)
 
 Install Maven.
 
