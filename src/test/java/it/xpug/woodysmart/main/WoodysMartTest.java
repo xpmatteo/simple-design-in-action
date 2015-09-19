@@ -4,7 +4,6 @@ package it.xpug.woodysmart.main;
 
 import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.*;
-import it.xpug.toolkit.web.*;
 
 import java.io.*;
 import java.net.*;
@@ -20,22 +19,10 @@ import org.apache.http.message.*;
 import org.json.*;
 import org.junit.*;
 
-public class WoodysMartTest {
-
-	private static ReusableJettyApp app = new ReusableJettyApp(new WoodysMartServlet());
-
-	@BeforeClass
-	public static void startApplication() throws Exception {
-		app.start(8123, "src/main/webapp");
-	}
-
-	@AfterClass
-	public static void shutdownApplication() throws Exception {
-		app.shutdown();
-	}
+public class WoodysMartTest extends TestWithALiveServer {
 
 	@Before
-	public void clearTodoLists() {
+	public void clearParams() {
 		params.clear();
     }
 
@@ -53,7 +40,6 @@ public class WoodysMartTest {
 		assertStatus(200);
 		assertThat(responseBody(), containsString("Welcome to Woody's Mart!"));
 	}
-
 
 	protected void assertBody(String expectedBody) throws IllegalStateException, IOException {
 		String body = responseBody();

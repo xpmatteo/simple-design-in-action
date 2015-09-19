@@ -9,17 +9,17 @@
     <h1>Enter a new order</h1>
 
     <form action="/orders/new" method="post" accept-charset="utf-8">
-      <p><label for="order_id">Order ID:</label><br><input type="text" name="order_id" id="order_id"></p>
+      <p><label for="order_code">Order ID:</label><br><input type="text" name="order_code" id="order_code"></p>
 
       <p>
         <label>Article ID:</label><br>
-        <input type="radio" name="article_id" value="TR000"> <label>Tennis Racket</label><br>
-        <input type="radio" name="article_id" value="HR000"> <label>Hockey Racket</label><br>
-        <input type="radio" name="article_id" value="CR000"> <label>Cricket Racket</label><br>
+        <input type="radio" name="article_code" value="TR000"> <label>Tennis Racket</label><br>
+        <input type="radio" name="article_code" value="HR000"> <label>Hockey Racket</label><br>
+        <input type="radio" name="article_code" value="CR000"> <label>Cricket Racket</label><br>
       </p>
 
       <label>Address:</label><br>
-      <textarea name="Address" rows="8" cols="40">
+      <textarea name="address" rows="8" cols="40">
 Mr. Esteemed D. Customer
 123 Main St.
 Smallville
@@ -35,11 +35,11 @@ USA
     };
 
     function randomizeOrderId() {
-      document.getElementById("order_id").value = aFourDigitRandomInteger();
+      document.getElementById("order_code").value = aFourDigitRandomInteger();
     }
 
     function randomizeArticleId() {
-      chooseRandomly(document.getElementsByName("article_id")).checked = true;
+      chooseRandomly(document.getElementsByName("article_code")).checked = true;
     }
 
     function aFourDigitRandomInteger() {
@@ -53,7 +53,6 @@ USA
     function chooseRandomly(array) {
       return array[aRandomIntegerSmallerThan(array.length)];
     }
-
     </script>
   </body>
 </html>
