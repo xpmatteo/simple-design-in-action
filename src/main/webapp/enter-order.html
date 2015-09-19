@@ -13,16 +13,14 @@
 
       <p>
         <label>Article ID:</label><br>
-        <select name="article_id">
-          <option value="TRK000">Tennis racket</option>
-          <option value="HRK000">Hockey racket</option>
-          <option value="CRK000">Cricket racket</option>
-        </select>
+        <input type="radio" name="article_id" value="TR000"> <label>Tennis Racket</label><br>
+        <input type="radio" name="article_id" value="HR000"> <label>Hockey Racket</label><br>
+        <input type="radio" name="article_id" value="CR000"> <label>Cricket Racket</label><br>
       </p>
 
       <label>Address:</label><br>
       <textarea name="Address" rows="8" cols="40">
-Mr. Esteemed C. Customer
+Mr. Esteemed D. Customer
 123 Main St.
 Smallville
 USA
@@ -33,11 +31,29 @@ USA
     <script>
     window.onload = function() {
       randomizeOrderId();
+      randomizeArticleId();
     };
 
     function randomizeOrderId() {
-      document.getElementById("order_id").value = 1000 + Math.abs(Math.floor(Math.random()*9000));
+      document.getElementById("order_id").value = aFourDigitRandomInteger();
     }
+
+    function randomizeArticleId() {
+      chooseRandomly(document.getElementsByName("article_id")).checked = true;
+    }
+
+    function aFourDigitRandomInteger() {
+      return 1000 + Math.abs(Math.floor(Math.random()*9000));
+    }
+
+    function aRandomIntegerSmallerThan(n) {
+      return Math.floor(Math.random() * n);
+    }
+
+    function chooseRandomly(array) {
+      return array[aRandomIntegerSmallerThan(array.length)];
+    }
+
     </script>
   </body>
 </html>
