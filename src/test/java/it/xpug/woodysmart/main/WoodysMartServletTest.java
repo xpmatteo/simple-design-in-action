@@ -19,7 +19,7 @@ import org.apache.http.message.*;
 import org.json.*;
 import org.junit.*;
 
-public class WoodysMartTest extends TestWithALiveServer {
+public class WoodysMartServletTest extends TestWithALiveServer {
 
 	@Before
 	public void clearParams() {
