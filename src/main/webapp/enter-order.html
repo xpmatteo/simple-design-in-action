@@ -1,0 +1,43 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Woody's: Enter a new order</title>
+    </style>
+  </head>
+  <body>
+    <h1>Enter a new order</h1>
+
+    <form action="/orders/new" method="post" accept-charset="utf-8">
+      <p><label for="order_id">Order ID:</label><br><input type="text" name="order_id" id="order_id"></p>
+
+      <p>
+        <label>Article ID:</label><br>
+        <select name="article_id">
+          <option value="TRK000">Tennis racket</option>
+          <option value="HRK000">Hockey racket</option>
+          <option value="CRK000">Cricket racket</option>
+        </select>
+      </p>
+
+      <label>Address:</label><br>
+      <textarea name="Address" rows="8" cols="40">
+Mr. Esteemed C. Customer
+123 Main St.
+Smallville
+USA
+      </textarea>
+      <p><input type="submit" value="Enter"></p>
+    </form>
+
+    <script>
+    window.onload = function() {
+      randomizeOrderId();
+    };
+
+    function randomizeOrderId() {
+      document.getElementById("order_id").value = 1000 + Math.abs(Math.floor(Math.random()*9000));
+    }
+    </script>
+  </body>
+</html>
