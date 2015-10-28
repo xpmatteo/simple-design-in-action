@@ -29,10 +29,11 @@ You download and install our git repository.  There are several stages, each one
 
 ## What are the stages?
 
-0. Set up a web-based todo-list
-1. Implement more business rules
-2. Add html templates
-3. Add database persistence
+0. Set up a web-based Hello, world!
+1. Implement a basic business scenario
+2. Implement more business rules
+3. Add a nicer UI and html templates
+4. Add database persistence
 
 
 ## Quickstart
@@ -90,16 +91,19 @@ Then observe your orders at
 
 Checkout the `master` branch.
 
+The goal of this stage is to have a well-tested "hello, world" web application.
+
+Run all the tests.  You will see one fail.  Make it pass.
+
+When the test passes, check that it also works in the browser!
+
+
+# Stage 1
+
 The goal for this stage is to execute the simplest business case:
 
  1. An order is entered
  2. We see it on the page
  3. The operator ships the order (offline) and marks the order shipped (in the app)
  4. The order is no longer on the page
-
-Run all the tests.  You will see one fail.  Make it pass.
-
-
-
-
 
