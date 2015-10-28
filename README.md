@@ -20,7 +20,7 @@ Simple design overcomes this problem by clearly separating functional code (doma
 
 In addition to that, in simple design we make infrastructure code **very** simple.
 
-So this is the learning goal: make infrastructure code so simple that it lets us solve business problems easily.
+So this is the learning goal: **make infrastructure code so simple that it lets us solve business problems easily.**
 
 
 ## How does this exercise work?
@@ -64,13 +64,13 @@ Execute
 
 In Eclipse, right-click on the it.xpug.todolists.main.Main class and select Debug As... > Java Application.
 
-Then observe the application at http://localhost:8080/
+Then observe the application at `http://localhost:8080/`
 
 In most cases, you will be able to make changes to a class and see it reloaded automatically when you refresh the browser.  In some cases, you'll have to restart the server, which should take less than a second.
 
 Another way to run the application is to run the script
 
-script/run.sh
+    script/run.sh
 
 
 ### Manual test
@@ -84,4 +84,22 @@ Then observe your orders at
     http://localhost:8080/orders/list
 
 (but this last page is probably not implemented yet!)
+
+
+# Stage 0
+
+Checkout the `master` branch.
+
+The goal for this stage is to execute the simplest business case:
+
+ 1. An order is entered
+ 2. We see it on the page
+ 3. The operator ships the order (offline) and marks the order shipped (in the app)
+ 4. The order is no longer on the page
+
+Run all the tests.  You will see one fail.  Make it pass.
+
+
+
+
 
