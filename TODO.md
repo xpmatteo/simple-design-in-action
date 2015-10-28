@@ -17,3 +17,7 @@
 
 ## Buy cheap memory sticks to distribute the exercise
 
+## Cheat sheet for
+ - servlet API
+ - mockito
+ - junit
