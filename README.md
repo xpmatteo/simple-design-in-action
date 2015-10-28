@@ -1,6 +1,48 @@
-## Import the project in Eclipse (the manual way)
 
-## Import the project in Eclipse (with maven)
+# Simple design in action!
+
+## The problem
+
+Woody's Mart is a big retail chain.  They recently built an ecommerce website; the website generates orders that must be executed by the Order Fulfillment Department.  We are writing a support app for the Order Fulfillment Department.
+
+It works like this: we expose an API that receives new orders.  The operators can monitor outstanding orders on a web page.  When they fulfill an order, they mark the order as "done", and it disappears from the list.  You can think of it as a sort of "to-do list".
+
+Once the basic functionality is done we'll handle the more complex business cases.
+
+The inspiration for this exercise comes from the classic [kata 16 by Prag Dave](http://codekata.com/kata/kata16-business-rules/)
+
+
+## What are we trying to learn?
+
+The main thing that makes programming difficult is that the complexity of the business rules is mixed up with the complexity of setting up the infrastructure: web, database, etc.  In other words, the functional requirements are mixed up with the non-functional requirements.
+
+Simple design overcomes this problem by clearly separating functional code (domain model) by non-functional code (non-functional code).
+
+In addition to that, in simple design we make infrastructure code **very** simple.
+
+So this is the learning goal: make infrastructure code so simple that it lets us solve business problems easily.
+
+
+## How does this exercise work?
+
+You download and install our git repository.  There are several stages, each one is a separate branch.  In each stage there are failing tests that you will have to make pass, one by one.  Once the stage is over, you can pass to the following stage.  If you didn't finish implementing the previous stage, don't worry: every stage contains a solution to the previous one.
+
+## What are the stages?
+
+0. Set up a web-based todo-list
+1. Implement more business rules
+2. Add html templates
+3. Add database persistence
+
+
+## Quickstart
+
+### Import the project in Eclipse (the manual way)
+
+Use Import... > Existing Project in Eclipse.
+
+
+### Import the project in Eclipse (with maven)
 
 Install Maven.
 
@@ -10,31 +52,36 @@ Then run
 
 Then use Import... > Existing Project in Eclipse.
 
-## Run the project
+
+### Import the project in IntelliJ Idea (with maven)
+
+Execute
+
+    mvn idea:idea
+
+
+### Run the project
 
 In Eclipse, right-click on the it.xpug.todolists.main.Main class and select Debug As... > Java Application.
 
 Then observe the application at http://localhost:8080/
 
-## EXERCISES FOR LESSON 12
+In most cases, you will be able to make changes to a class and see it reloaded automatically when you refresh the browser.  In some cases, you'll have to restart the server, which should take less than a second.
+
+Another way to run the application is to run the script
+
+script/run.sh
 
 
-### 0. Pass the login screen
+### Manual test
 
-The server knows only one hardcoded user.  Its email is "x@x.com" and its name is "x".  Add JavaScript code so that the login form
+We have provided a test page that sends test data to the order entry API.  Find it at
 
-  - sends the credentials to the server
-  - if the credentials are accepted, it hides the login form and shows the "my lists" page
-  - otherwise, it shows an error message and keeps asking for valid credentials
+    http://localhost:8080/enter-order.html
 
-### 1. Implement a database-backed user repository
+Then observe your orders at
 
-  - The tests of the DatabaseUserRepositoryTest are failing.  Make them pass!
-  - Remember, never save the cleartext password in the database.  You may use SHA256 to encrypt it.
+    http://localhost:8080/orders/list
 
-### 2. Use the DatabaseUserRepositoryTest in the LoginResource
-
-  - The LoginResource knows a single, hardcoded user.  This is not satisfactory!  Change it to use the DatabaseUserRepository to look up users.
-  - We don't have a registration form yet, but we don't need it to make progress.  You can save a few test users in the database directly.
-  - Check that you can log in with the credentials of the test users in the database.
+(but this last page is probably not implemented yet!)
 
