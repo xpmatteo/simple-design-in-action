@@ -1,6 +1,7 @@
-package it.xpug.woodysmart.main;
+package it.xpug.woodysmart.main.util;
 
 import it.xpug.toolkit.web.*;
+import it.xpug.woodysmart.main.*;
 
 import org.junit.*;
 

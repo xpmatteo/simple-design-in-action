@@ -4,6 +4,7 @@ package it.xpug.woodysmart.main;
 
 import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.*;
+import it.xpug.woodysmart.main.util.*;
 
 import java.io.*;
 import java.net.*;
@@ -19,27 +20,38 @@ import org.apache.http.message.*;
 import org.json.*;
 import org.junit.*;
 
-public class WoodysMartServletTest extends TestWithALiveServer {
+public class T0_EndToEndHelloWorldTest extends TestWithALiveServer {
 
-	@Before
-	public void clearParams() {
-		params.clear();
-    }
+	@Test
+	public void helloWorld() throws Exception {
+		get("/hello");
+
+		assertStatus(200);
+		assertThat(responseBody(), containsString("Hello, world!"));
+	}
 
 	@Test
 	public void notFound() throws Exception {
 		get("/notexistent");
 
 		assertStatus(404);
+		assertThat(responseBody(), containsString("Ooops! Not found!"));
 	}
 
 	@Test
-	public void index() throws Exception {
-		get("/");
+	public void helloName() throws Exception {
+		params.put("name", "Woody");
+		get("/hello");
 
 		assertStatus(200);
-		assertThat(responseBody(), containsString("Welcome to Woody's Mart!"));
+		assertThat(responseBody(), containsString("Hello, Woody!"));
 	}
+
+
+	@Before
+	public void clearParams() {
+		params.clear();
+    }
 
 	protected void assertBody(String expectedBody) throws IllegalStateException, IOException {
 		String body = responseBody();
