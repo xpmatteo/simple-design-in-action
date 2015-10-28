@@ -28,35 +28,7 @@ public class WoodysMartServlet extends HttpServlet {
 
 	@Override
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		if (request.getRequestURI().equals("/hello")) {
-			doHello(request, response);
-		} else {
-			returnNotFound(response);
-		}
+		response.getWriter().write("......");
 	}
 
-	private void doHello(HttpServletRequest request, HttpServletResponse response) throws IOException {
-		if (!request.getMethod().equals("GET")) {
-			returnMethodNotAllowed(response);
-			return;
-		}
-	    String name = request.getParameter("name");
-	    if (null == name)
-	    	name = "world";
-	    response.setStatus(200);
-	    response.getWriter().write(String.format("Hello, %s!", name));
-    }
-
-	private void returnMethodNotAllowed(HttpServletResponse response) throws IOException {
-	    returnError(response, HttpServletResponse.SC_METHOD_NOT_ALLOWED, "Method not allowed");
-    }
-
-	private void returnNotFound(HttpServletResponse response) throws IOException {
-	    returnError(response, 404, "Ooops! Not found!");
-    }
-
-	private void returnError(HttpServletResponse response, int statusCode, String message) throws IOException {
-	    response.setStatus(statusCode);
-		response.getWriter().write(message);
-    }
 }
