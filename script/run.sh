@@ -3,5 +3,6 @@
 set -e
 cd "$(dirname $0)/.."
 
-mvn package -DskipTests=true
-java -cp target/classes:"target/dependency/*" it.xpug.woodysmart.main.Main
+mkdir -p target/classes 2> /dev/null || true
+javac -g -d target/classes -cp 'lib/*' -sourcepath src/main/java $(find src/main/java -iname *.java)
+java -cp 'target/classes:lib/*' it.xpug.woodysmart.main.Main
