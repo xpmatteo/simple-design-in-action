@@ -3,39 +3,95 @@
   <head>
     <meta charset="UTF-8">
     <title>Woody's: Enter a new order</title>
+    <style type="text/css" media="screen">
+      body {
+        font-family: Verdana, Geneva, sans-serif;
+      }
+      div {
+        display: inline-block;
+        vertical-align: top;
+      }
+      div#results {
+        margin-left: 3em;
+        padding: 3em;
+      }
     </style>
   </head>
   <body>
     <h1>Enter a new order</h1>
 
-    <form action="/orders" method="post" accept-charset="utf-8">
-      <p><label for="order_code">Order Code:</label><br><input type="text" name="order_code" id="order_code"></p>
+    <div id="form">
+      <form method="post" accept-charset="utf-8">
+        <p><label for="order_code">Order Code:</label><br><input type="text" name="order_code" id="order_code"></p>
 
-      <p>
-        <label>Article:</label><br>
-        <input type="radio" name="article_code" value="TR000"> <label>Tennis Racket</label><br>
-        <input type="radio" name="article_code" value="HR000"> <label>Hockey Racket</label><br>
-        <input type="radio" name="article_code" value="CR000"> <label>Cricket Racket</label><br>
-      </p>
+        <p>
+          <label>Article:</label><br>
+          <input type="radio" name="article_code" value="TR000"> <label>TR000 Tennis Racket</label><br>
+          <input type="radio" name="article_code" value="HR000"> <label>HR000 Hockey Racket</label><br>
+          <input type="radio" name="article_code" value="CR000"> <label>CR000 Cricket Racket</label><br>
+        </p>
 
-      <label>Address:</label><br>
-      <textarea name="address" rows="8" cols="40">
-Mr. Esteemed D. Customer
+        <label>Address:</label><br>
+        <textarea name="address" rows="8" cols="40">
+Mr. Esteemed Customer
 123 Main St.
 Smallville
 USA
-      </textarea>
-      <p><input type="submit" value="Enter"></p>
-    </form>
+        </textarea>
+        <p><input type="submit" value="Enter"></p>
+      </form>
+    </div>
 
+    <div id="results">
+    </div>
+
+    <script src='/js/lib/jquery-1.10.2.min.js'></script>
     <script>
-    window.onload = function() {
+
+    $(function() {
+      randomizeAll();
+      $("form").submit(enter_order);
+    });
+
+    function randomizeAll() {
       randomizeOrderId();
       randomizeArticleId();
-    };
+    }
+
+    function enter_order() {
+      $.ajax({
+        method: 'post',
+        url: '/orders',
+        data: $("form").serialize(),
+        success: on_enter_order_success,
+        error: on_error,
+      });
+      return false;
+    }
+
+    function on_enter_order_success() {
+      $.ajax({
+        method: 'get',
+        url: '/orders',
+        success: on_get_orders_success,
+        error: on_error
+      });
+    }
+
+    function on_get_orders_success(data) {
+      $("#results").attr('style', 'background-color: lime');
+      var title = "<h2>What the orders page shows:</h2>";
+      $("#results").html(title + data);
+      randomizeAll();
+    }
+
+    function on_error(data) {
+      $("#results").attr('style', 'background-color: pink');
+      $("#results").text(JSON.stringify(data));
+    }
 
     function randomizeOrderId() {
-      document.getElementById("order_code").value = aFourDigitRandomInteger();
+      $("#order_code").val(aFourDigitRandomInteger());
     }
 
     function randomizeArticleId() {
