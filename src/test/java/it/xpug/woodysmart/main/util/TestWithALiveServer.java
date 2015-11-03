@@ -86,19 +86,19 @@ public class TestWithALiveServer {
 		return "http://localhost:" + 8123;
 	}
 
-	protected String queryString() {
+	protected String queryString() throws UnsupportedEncodingException {
 		String queryString = "";
 		for (String name : params.keySet()) {
 			if (!queryString.isEmpty())
 				queryString += "&";
-			queryString += name + "=" + params.get(name);
+			queryString += urlEncode(name) + "=" + urlEncode(params.get(name));
 		}
 		if (!queryString.isEmpty())
 			queryString = "?" + queryString;
 		return queryString;
 	}
 
-	protected void addParameters(HttpPost request) throws UnsupportedEncodingException {
+	private void addParameters(HttpPost request) throws UnsupportedEncodingException {
 		List<NameValuePair> parameters = new ArrayList<NameValuePair>();
 		for (String name : params.keySet()) {
 			parameters.add(new BasicNameValuePair(name, params.get(name)));
@@ -106,4 +106,7 @@ public class TestWithALiveServer {
 		request.setEntity(new UrlEncodedFormEntity(parameters));
 	}
 
+	private String urlEncode(String name) throws UnsupportedEncodingException {
+	    return URLEncoder.encode(name, "UTF-8");
+    }
 }
