@@ -13,9 +13,10 @@ import javax.servlet.http.*;
  *     If the request is for http://localhost:8080/foobar, it returns "/foobar"
  *
  *   request.getParameter(String name)
- *     returns a query parameter.  If the request is for http://localhost:8080/foobar?foo=bar, then
+ *     returns a request parameter.  If the request is for http://localhost:8080/foobar?foo=bar, then
  *       getParameter("foo") returns "bar".
  *       getParameter("something else") returns null.
+ *     It also works for POST request parameters.
  *
  *   request.getMethod()
  *   	returns "GET" or "POST" depending on the http request method.
@@ -23,6 +24,8 @@ import javax.servlet.http.*;
  *   response.setStatus(int status)
  *     sets the HTTP status code.  Example: response.setStatus(200)
  *
+ *   response.getWriter().write("...")
+ *     write the content that the user will see.
  */
 public class WoodysMartServlet extends HttpServlet {
 
