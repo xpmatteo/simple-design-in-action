@@ -21,6 +21,7 @@ public class TestWithALiveServer {
 
 	private static ReusableJettyApp app = new ReusableJettyApp(new WoodysMartServlet());
 	private HttpResponse response;
+	private String cachedResponseBody;
 	protected Map<String, String> params = new HashMap<String, String>();
 
 	@BeforeClass
@@ -39,12 +40,14 @@ public class TestWithALiveServer {
     }
 
 	protected String responseBody() throws IOException {
-	    byte[] bytes = new byte[10000];
-		int bytesRead = response.getEntity().getContent().read(bytes);
-		if (bytesRead == -1)
-			return "";
-		String body = new String(bytes, 0, bytesRead, Charset.forName("UTF-8"));
-	    return body;
+		if (this.cachedResponseBody == null) {
+		    byte[] bytes = new byte[10000];
+			int bytesRead = response.getEntity().getContent().read(bytes);
+			if (bytesRead == -1)
+				return "";
+			cachedResponseBody = new String(bytes, 0, bytesRead, Charset.forName("UTF-8"));
+		}
+	    return cachedResponseBody;
 	}
 
 	protected void assertMimeType(String expectedMimeType) {
@@ -79,6 +82,7 @@ public class TestWithALiveServer {
 	}
 
 	protected HttpClient makeHttpClient() {
+		cachedResponseBody = null;
 		return HttpClientBuilder.create().disableRedirectHandling().build();
 	}
 
