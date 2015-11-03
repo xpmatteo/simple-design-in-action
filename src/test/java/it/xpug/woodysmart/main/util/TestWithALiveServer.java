@@ -1,14 +1,13 @@
 package it.xpug.woodysmart.main.util;
 
 import static org.junit.Assert.*;
+import it.xpug.toolkit.web.*;
+import it.xpug.woodysmart.main.*;
 
 import java.io.*;
 import java.net.*;
 import java.nio.charset.*;
 import java.util.*;
-
-import it.xpug.toolkit.web.*;
-import it.xpug.woodysmart.main.*;
 
 import org.apache.http.*;
 import org.apache.http.client.*;
@@ -16,7 +15,6 @@ import org.apache.http.client.entity.*;
 import org.apache.http.client.methods.*;
 import org.apache.http.impl.client.*;
 import org.apache.http.message.*;
-import org.json.*;
 import org.junit.*;
 
 public class TestWithALiveServer {
@@ -39,13 +37,6 @@ public class TestWithALiveServer {
     public void clearParams() {
     	params.clear();
     }
-
-	protected void assertBody(String expectedBody) throws IllegalStateException, IOException {
-		String body = responseBody();
-		String expected = new JSONObject(expectedBody).toString(2);
-		String actual = new JSONObject(body).toString(2);
-		assertEquals("Body",  expected, actual);
-	}
 
 	protected String responseBody() throws IOException {
 	    byte[] bytes = new byte[10000];
