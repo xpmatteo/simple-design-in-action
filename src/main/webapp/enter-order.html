@@ -8,11 +8,11 @@
   <body>
     <h1>Enter a new order</h1>
 
-    <form action="/orders/new" method="post" accept-charset="utf-8">
-      <p><label for="order_code">Order ID:</label><br><input type="text" name="order_code" id="order_code"></p>
+    <form action="/orders" method="post" accept-charset="utf-8">
+      <p><label for="order_code">Order Code:</label><br><input type="text" name="order_code" id="order_code"></p>
 
       <p>
-        <label>Article ID:</label><br>
+        <label>Article:</label><br>
         <input type="radio" name="article_code" value="TR000"> <label>Tennis Racket</label><br>
         <input type="radio" name="article_code" value="HR000"> <label>Hockey Racket</label><br>
         <input type="radio" name="article_code" value="CR000"> <label>Cricket Racket</label><br>
