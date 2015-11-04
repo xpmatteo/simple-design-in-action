@@ -6,7 +6,7 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 
 /*
- * Servlet API cheat sheet:
+ *   == Servlet API cheat sheet ==
  *
  *   request.getRequestURI()
  *     returns the path of the request.
@@ -21,11 +21,15 @@ import javax.servlet.http.*;
  *   request.getMethod()
  *   	returns "GET" or "POST" depending on the http request method.
  *
+ *
  *   response.setStatus(int status)
  *     sets the HTTP status code.  Example: response.setStatus(200)
  *
  *   response.getWriter().write("...")
  *     write the content that the user will see.
+ *
+ *   response.sendRedirect("/foo/bar")
+ *     redirect the browser to the url "/foo/bar"
  */
 public class WoodysMartServlet extends HttpServlet {
 
