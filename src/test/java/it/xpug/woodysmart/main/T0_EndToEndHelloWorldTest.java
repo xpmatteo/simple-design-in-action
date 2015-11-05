@@ -2,7 +2,7 @@ package it.xpug.woodysmart.main;
 
 
 
-import static org.hamcrest.CoreMatchers.*;
+import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.*;
 import it.xpug.woodysmart.main.util.*;
 
