@@ -1,0 +1,58 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Woody's: Enter a new order</title>
+    </style>
+  </head>
+  <body>
+    <h1>Enter a new order</h1>
+
+    <form action="/orders" method="post" accept-charset="utf-8">
+      <p><label for="order_code">Order Code:</label><br><input type="text" name="order_code" id="order_code"></p>
+
+      <p>
+        <label>Article:</label><br>
+        <input type="radio" name="article_code" value="TR000"> <label>Tennis Racket</label><br>
+        <input type="radio" name="article_code" value="HR000"> <label>Hockey Racket</label><br>
+        <input type="radio" name="article_code" value="CR000"> <label>Cricket Racket</label><br>
+      </p>
+
+      <label>Address:</label><br>
+      <textarea name="address" rows="8" cols="40">
+Mr. Esteemed D. Customer
+123 Main St.
+Smallville
+USA
+      </textarea>
+      <p><input type="submit" value="Enter"></p>
+    </form>
+
+    <script>
+    window.onload = function() {
+      randomizeOrderId();
+      randomizeArticleId();
+    };
+
+    function randomizeOrderId() {
+      document.getElementById("order_code").value = aFourDigitRandomInteger();
+    }
+
+    function randomizeArticleId() {
+      chooseRandomly(document.getElementsByName("article_code")).checked = true;
+    }
+
+    function aFourDigitRandomInteger() {
+      return 1000 + Math.abs(Math.floor(Math.random()*9000));
+    }
+
+    function aRandomIntegerSmallerThan(n) {
+      return Math.floor(Math.random() * n);
+    }
+
+    function chooseRandomly(array) {
+      return array[aRandomIntegerSmallerThan(array.length)];
+    }
+    </script>
+  </body>
+</html>

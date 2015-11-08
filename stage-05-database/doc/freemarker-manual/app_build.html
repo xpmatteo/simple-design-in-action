@@ -1,0 +1,99 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <link rel="stylesheet" href="docgen-resources/docgen.css" type="text/css">
+  <meta name="generator" content="FreeMarker Docgen (DocBook 5)">
+  <title>
+    FreeMarker Manual - Building FreeMarker
+  </title>
+    <script type="text/javascript" src="docgen-resources/jquery.js"></script>
+    <script type="text/javascript" src="docgen-resources/linktargetmarker.js"></script>
+</head>
+<body>
+
+    <div class="navigation">
+    <div class="breadcrumb">
+<span class="breadcrumb">        You are here:
+          <a href="index.html">Book</a>
+            <b>></b>
+          <a href="app.html">Appendixes</a>
+            <b>></b>
+          Building FreeMarker
+</span>    </div>
+    <div class="bookmarks">
+<span class="bookmarks">Bookmarks:
+<a href="alphaidx.html">Alphabetical Index</a>, <a href="gloss.html">Glossary</a>, <a href="ref.html">Reference</a>, <a href="app_faq.html">FAQ</a>, <a href="api/index.html">Java API</a>, <a href="../index.html">FreeMarker Home</a></span>    </div>
+    <div class="pagers">
+      <div class="pagersVerticalSpacer"><img src="docgen-resources/img/none.gif" width="1" height="1" alt="" hspace="0" vspace="0" border="0"/></div>
+<div class="pagerButton"><a href="app_versions.html"><span class="hideA">Next page: </span>Versions</a></div><div class="pagerButton"><a href="app_install.html">Previous page</a></div><div class="pagerButton"><a href="app.html">Parent page</a></div><div class="pagerButton"><a href="index.html">Contents</a></div>      <div class="pagersVerticalSpacer"><img src="docgen-resources/img/none.gif" width="1" height="1" alt="" hspace="0" vspace="0" border="0"/></div>
+    </div>
+    </div>
+
+<div id="mainContent">
+
+  
+  
+  
+  
+  <h1 class="rank_chapter"
+        id="pageTopTitle">
+<a name="app_build"></a>Appendix C   Building FreeMarker  </h1>
+    
+    
+<p>If you want to modify the source code and rebuild
+      <tt style="color: #A03D10">freemarker.jar</tt>, you need <a href="http://ant.apache.org/">Ant</a> 1.6.1 (or newer) and JDK
+      5 (or newer). If these are satisfied, just run Ant from the root
+      directory of the distribution, and it will create the new
+      <tt style="color: #A03D10">freemarker.jar</tt>. Note that for the very first build
+      you must be on-line, because the build task will download a lot of
+      required dependencies (about 20 MB) into the <tt style="color: #A03D10">lib</tt>
+      subdirectory of distribution root directory.</p><p>Maybe you should check the new jar file against our test suite.
+      This is done by running Ant with <tt style="color: #A03D10">test</tt> target (go to
+      the root directory of the distribution, and issue &quot;ant test&quot;). If the
+      test fails, read the resulting <tt style="color: #A03D10">.txt</tt> file in the
+      <tt style="color: #A03D10">build/testcase</tt> directory for more details.</p><p>Note that building a full distribution, which includes the
+      FreeMarker Manual and the off-line Web site, is not possible purely from
+      the source code that is included with the distribution. You will have to
+      check out the &quot;docgen&quot; and &quot;site&quot; sub-projects from the SVN repository
+      of FreeMarker for that.</p>  
+</div>
+
+    <div class="navigation">
+    <div class="pagers">
+      <div class="pagersVerticalSpacer"><img src="docgen-resources/img/none.gif" width="1" height="1" alt="" hspace="0" vspace="0" border="0"/></div>
+<div class="pagerButton"><a href="app_versions.html"><span class="hideA">Next page: </span>Versions</a></div><div class="pagerButton"><a href="app_install.html">Previous page</a></div><div class="pagerButton"><a href="app.html">Parent page</a></div><div class="pagerButton"><a href="index.html">Contents</a></div>      <div class="pagersVerticalSpacer"><img src="docgen-resources/img/none.gif" width="1" height="1" alt="" hspace="0" vspace="0" border="0"/></div>
+    </div>
+    <div class="breadcrumb">
+<span class="breadcrumb">        You are here:
+          <a href="index.html">Book</a>
+            <b>></b>
+          <a href="app.html">Appendixes</a>
+            <b>></b>
+          Building FreeMarker
+</span>    </div>
+    </div>
+
+<table border=0 cellspacing=0 cellpadding=0 width="100%">
+    <tr>
+      <td colspan=2><img src="docgen-resources/img/none.gif" width=1 height=8 alt=""></td>
+    <tr>
+      <td align="left" valign="top"><span class="smallFooter">
+            FreeMarker Manual -- For FreeMarker 2.3.16
+            <br>
+          HTML generated: 2009-12-08 08:38:54 GMT
+      </span></td>
+      <td align="right" valign="top"><span class="smallFooter">
+          <a href="http://www.xmlmind.com/xmleditor/">
+            <img src="docgen-resources/img/xxe.gif" alt="Edited with XMLMind XML Editor">
+          </a>
+      </span></td>
+    </tr>
+</table>
+  <!-- Put pre-loaded images here: -->
+  <div style="display: none">
+    <img src="docgen-resources/img/linktargetmarker.gif" alt="Here!" />
+  </div>
+</body>
+</html>
+
