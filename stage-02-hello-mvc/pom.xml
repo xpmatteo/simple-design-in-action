@@ -65,11 +65,13 @@
       <version>RELEASE</version>
     </dependency>
 
+    <!-- H2 is a pure-Java database -->
     <dependency>
-      <groupId>org.postgresql</groupId>
-      <artifactId>postgresql</artifactId>
-      <version>9.3-1101-jdbc4</version>
+      <groupId>com.h2database</groupId>
+      <artifactId>h2</artifactId>
+      <version>1.4.190</version>
     </dependency>
+
 
     <!-- The following dependencies are used in testing -->
     <dependency>
