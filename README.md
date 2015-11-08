@@ -29,21 +29,21 @@ You download and install our git repository.  There are several stages, each one
 
 ## What are the stages?
 
-0. Set up a web-based Hello, world!
-1. Implement a basic business scenario
-2. Implement more business rules
-3. Add a nicer UI and html templates
-4. Add database persistence
+1. Set up a web-based Hello, world!
+2. Again Hello, world, but now we use Controller and View objects
+3. Implement the "order shipping" scenario
+4. Add a nicer UI and html templates
+5. Add database persistence
 
 
 ## Quickstart
 
-### Import the project in Eclipse (the manual way)
+### Import the projects in Eclipse (the manual way)
 
 Use Import... > Existing Project in Eclipse.
 
 
-### Import the project in Eclipse (with maven)
+### Import the projects in Eclipse (with maven)
 
 Install Maven.
 
@@ -54,7 +54,7 @@ Then run
 Then use Import... > Existing Project in Eclipse.
 
 
-### Import the project in IntelliJ Idea (with maven)
+### Import the projects in IntelliJ Idea (with maven)
 
 Execute
 
@@ -87,23 +87,18 @@ Then observe your orders at
 (but this last page is probably not implemented yet!)
 
 
-# Stage 0
+# Stage 1
 
 Checkout the `master` branch.
 
 The goal of this stage is to have a well-tested "hello, world" web application.
 
-Run all the tests.  You will see one fail.  Make it pass.
+Run all the tests.  You will see one fail.  Make it pass.  Un-ignore the next test.  Make it pass!
 
-When the test passes, check that it also works in the browser!
+When all the tests pass, check that it also works in the browser!
 
 
-# Stage 1
+# Stage 2
 
-The goal for this stage is to execute the simplest business case:
-
- 1. An order is entered
- 2. We see it on the page
- 3. The operator ships the order (offline) and marks the order shipped (in the app)
- 4. The order is no longer on the page
+... same process, in the stage-02-hello-mvc project
 
