@@ -11,6 +11,6 @@ fi
 filename=$1
 
 for stage in stage-0[2-9]*; do
- cp stage-01-hello-world/$filename $stage/$dirname
+ cp -r stage-01-hello-world/$filename $stage/$dirname
 done
 

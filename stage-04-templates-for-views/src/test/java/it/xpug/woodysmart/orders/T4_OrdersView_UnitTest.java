@@ -1,7 +1,6 @@
 package it.xpug.woodysmart.orders;
 
 import static java.util.Arrays.*;
-import static java.util.Collections.*;
 import static org.junit.Assert.*;
 import it.xpug.toolkit.web.*;
 import it.xpug.woodysmart.util.*;
@@ -15,9 +14,9 @@ public class T4_OrdersView_UnitTest {
 	private FakeHttpServletResponse response = new FakeHttpServletResponse();
 	private OrdersView ordersView = new OrdersView(response);
 
-	@Test@Ignore
+	@Test
     public void showNoOrders() throws Exception {
-		ordersView.show(emptyList());
+		ordersView.show(emptyOrderList());
 
 		// We are looking for the "summary" paragraph with XPath.
 		// The //p[@id='summary'] means:
@@ -31,7 +30,7 @@ public class T4_OrdersView_UnitTest {
 		assertEquals("Outstanding Orders: 0", node.getTextContent());
     }
 
-	@Test@Ignore
+	@Test
     public void showOneOrder() throws Exception {
 		ordersView.show(asList(new Order("A", "B", "C")));
 
@@ -55,7 +54,7 @@ public class T4_OrdersView_UnitTest {
 		assertEquals("Address: C", getHtml().getNode(address).getTextContent());
     }
 
-	@Test@Ignore
+	@Test
     public void showTwoOrders() throws Exception {
 		ordersView.show(asList(
 				new Order("foo", "bar", "baz"),
@@ -68,7 +67,7 @@ public class T4_OrdersView_UnitTest {
 		assertEquals("Order Code: one", nodes.get(1).getTextContent());
     }
 
-	@Test@Ignore
+	@Test
     public void showTheShipButton() throws Exception {
 		ordersView.show(asList(new Order("88888", "X", "Y")));
 
@@ -85,7 +84,7 @@ public class T4_OrdersView_UnitTest {
 		assertTrue("Submit button not found", getHtml().matchesXPath(submitButton));
     }
 
-	@Test@Ignore
+	@Test
     public void refresh() throws Exception {
 		ordersView.refresh();
 
@@ -93,17 +92,11 @@ public class T4_OrdersView_UnitTest {
 		assertEquals(".", response.getRedirectedTo());
     }
 
-	/*
-	 * If you passed all the tests here, you're awesome!
-	 *
-	 * What to do now:
-	 *  a) un-ignore the T3_ReceiveAndShipOneOrder_AcceptanceTest and check that it works!
-	 *  b) run the application and check that it works!
-	 *  c) commit your changes (if you wish)
-	 *  d) check out stage-04-database
-	 */
-
 	private XmlNode getHtml() {
 	    return new XmlNode(response.getBody());
+    }
+
+	private List<Order> emptyOrderList() {
+	    return new ArrayList<Order>();
     }
 }

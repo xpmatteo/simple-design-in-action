@@ -1,7 +1,6 @@
 package it.xpug.woodysmart.orders;
 
 import static java.util.Arrays.*;
-import static java.util.Collections.*;
 import static org.junit.Assert.*;
 import it.xpug.toolkit.web.*;
 import it.xpug.woodysmart.util.*;
@@ -17,7 +16,7 @@ public class T4_OrdersView_UnitTest {
 
 	@Test
     public void showNoOrders() throws Exception {
-		ordersView.show(emptyList());
+		ordersView.show(emptyOrderList());
 
 		// We are looking for the "summary" paragraph with XPath.
 		// The //p[@id='summary'] means:
@@ -95,5 +94,9 @@ public class T4_OrdersView_UnitTest {
 
 	private XmlNode getHtml() {
 	    return new XmlNode(response.getBody());
+    }
+
+	private List<Order> emptyOrderList() {
+	    return new ArrayList<Order>();
     }
 }
