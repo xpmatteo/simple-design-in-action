@@ -10,14 +10,14 @@ import javax.servlet.http.*;
 
 import org.junit.*;
 
-public class T5_ReceiveAndShipOrdersTest {
+public class T3_ReceiveAndShipOrdersTest {
 
 	private HttpServletRequest request = mock(HttpServletRequest.class);
 	private OrdersView ordersView = mock(OrdersView.class);
 	private List<Order> orders = new ArrayList<Order>();
 	private OrdersController ordersController = new OrdersController(request, orders, ordersView);
 
-	@Test@Ignore
+	@Test
 	public void receiveAnOrder() throws Exception {
 		when(request.getMethod()).thenReturn("POST");
 		when(request.getRequestURI()).thenReturn("/orders");
@@ -52,11 +52,6 @@ public class T5_ReceiveAndShipOrdersTest {
 	    order.ship();
 
 	    assertEquals("order should be shipped", true, order.isShipped());
-    }
-
-	@Test
-    public void anOrderReturnsItsCode() throws Exception {
-	    assertEquals("xyz", new Order("xyz", null, null).getCode());
     }
 
 	@Test@Ignore
