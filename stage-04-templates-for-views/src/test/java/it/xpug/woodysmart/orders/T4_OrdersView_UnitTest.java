@@ -14,7 +14,7 @@ public class T4_OrdersView_UnitTest {
 	private FakeHttpServletResponse response = new FakeHttpServletResponse();
 	private OrdersView ordersView = new OrdersView(response);
 
-	@Test
+	@Test@Ignore
     public void showNoOrders() throws Exception {
 		ordersView.show(emptyOrderList());
 
@@ -30,7 +30,7 @@ public class T4_OrdersView_UnitTest {
 		assertEquals("Outstanding Orders: 0", node.getTextContent());
     }
 
-	@Test
+	@Test@Ignore
     public void showOneOrder() throws Exception {
 		ordersView.show(asList(new Order("A", "B", "C")));
 
@@ -54,7 +54,7 @@ public class T4_OrdersView_UnitTest {
 		assertEquals("Address: C", getHtml().getNode(address).getTextContent());
     }
 
-	@Test
+	@Test@Ignore
     public void showTwoOrders() throws Exception {
 		ordersView.show(asList(
 				new Order("foo", "bar", "baz"),
@@ -67,7 +67,7 @@ public class T4_OrdersView_UnitTest {
 		assertEquals("Order Code: one", nodes.get(1).getTextContent());
     }
 
-	@Test
+	@Test@Ignore
     public void showTheShipButton() throws Exception {
 		ordersView.show(asList(new Order("88888", "X", "Y")));
 
@@ -84,7 +84,7 @@ public class T4_OrdersView_UnitTest {
 		assertTrue("Submit button not found", getHtml().matchesXPath(submitButton));
     }
 
-	@Test
+	@Test@Ignore
     public void refresh() throws Exception {
 		ordersView.refresh();
 
