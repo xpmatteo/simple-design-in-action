@@ -10,3 +10,4 @@ MEMO
 - README
 - handolding per il primo uno/due stadi
 
+- forse c'era un caso in cui occorre triangolare per essere sicuri che il prog non imbrogli

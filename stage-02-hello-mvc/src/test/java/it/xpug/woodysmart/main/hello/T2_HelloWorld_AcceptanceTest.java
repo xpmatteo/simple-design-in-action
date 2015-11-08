@@ -8,9 +8,9 @@ import it.xpug.woodysmart.main.util.*;
 
 import org.junit.*;
 
-public class T0_HelloWorld_AcceptanceTest extends TestWithALiveServer {
+public class T2_HelloWorld_AcceptanceTest extends TestWithALiveServer {
 
-	@Test
+	@Test@Ignore
 	public void helloWorld() throws Exception {
 		get("/hello");
 

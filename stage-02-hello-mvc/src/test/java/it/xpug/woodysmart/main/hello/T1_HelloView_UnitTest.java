@@ -6,7 +6,7 @@ import it.xpug.woodysmart.main.util.*;
 
 import org.junit.*;
 
-public class T2_HelloView_UnitTest {
+public class T1_HelloView_UnitTest {
 
 	private FakeHttpServletResponse response = new FakeHttpServletResponse();
 	private HelloView helloView = new HelloView(response);

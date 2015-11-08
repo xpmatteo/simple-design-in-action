@@ -7,7 +7,7 @@ import javax.servlet.http.*;
 
 import org.junit.*;
 
-public class T1_HelloController_UnitTest {
+public class T0_HelloController_UnitTest {
 
 	private HttpServletRequest request = mock(HttpServletRequest.class);
 	private HelloView view = mock(HelloView.class);
