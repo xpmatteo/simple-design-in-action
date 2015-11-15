@@ -7,7 +7,7 @@ public class OrdersList {
 	public void add(Order orderFromRequest) {
     }
 
-	public Iterable<Order> all() {
+	public Collection<Order> all() {
 	    return new ArrayList<Order>();
     }
 

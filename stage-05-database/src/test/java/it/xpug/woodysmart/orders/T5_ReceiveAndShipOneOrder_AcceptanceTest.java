@@ -29,7 +29,7 @@ public class T5_ReceiveAndShipOneOrder_AcceptanceTest extends TestWithALiveServe
 		fail("It does not look good");
     }
 
-	@Test
+	@Test@Ignore
 	public void shipAnOrderAndHideIt() throws Exception {
 		// create the order
 		params.put("order_code", "6789");
