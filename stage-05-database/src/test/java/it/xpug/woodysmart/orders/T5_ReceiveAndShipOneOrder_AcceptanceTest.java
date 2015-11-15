@@ -6,7 +6,7 @@ import it.xpug.woodysmart.util.*;
 
 import org.junit.*;
 
-public class T3_ReceiveAndShipOneOrder_AcceptanceTest extends TestWithALiveServer {
+public class T5_ReceiveAndShipOneOrder_AcceptanceTest extends TestWithALiveServer {
 
 	@Test
 	public void noOrdersToBeShipped() throws Exception {

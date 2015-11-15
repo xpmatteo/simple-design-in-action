@@ -10,7 +10,7 @@ import javax.servlet.http.*;
 
 import org.junit.*;
 
-public class T5_ReceiveAndShipOrdersTest {
+public class T3_ReceiveAndShipOrdersTest {
 
 	private HttpServletRequest request = mock(HttpServletRequest.class);
 	private OrdersView ordersView = mock(OrdersView.class);
