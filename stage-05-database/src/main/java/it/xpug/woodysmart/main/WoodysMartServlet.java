@@ -1,11 +1,9 @@
 package it.xpug.woodysmart.main;
 
-import static java.util.Collections.*;
 import it.xpug.woodysmart.hello.*;
 import it.xpug.woodysmart.orders.*;
 
 import java.io.*;
-import java.util.*;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
@@ -38,7 +36,7 @@ import javax.servlet.http.*;
  */
 public class WoodysMartServlet extends HttpServlet {
 
-	private List<Order> orders = synchronizedList(new ArrayList<Order>());
+	private OrdersList orders = new OrdersList();
 
 	@Override
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

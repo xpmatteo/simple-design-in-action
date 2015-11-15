@@ -8,10 +8,10 @@ import javax.servlet.http.*;
 public class OrdersController {
 
 	private HttpServletRequest request;
-	private List<Order> orders;
+	private OrdersList orders;
 	private OrdersView view;
 
-	public OrdersController(HttpServletRequest request, List<Order> orders, OrdersView view) {
+	public OrdersController(HttpServletRequest request, OrdersList orders, OrdersView view) {
 		this.request = request;
 		this.orders = orders;
 		this.view = view;
@@ -40,7 +40,7 @@ public class OrdersController {
 
 	private Order findOrder(String orderCode) {
 	    Order orderByCode = null;
-	    for (Order order : orders) {
+	    for (Order order : orders.all()) {
 	    	if (order.getCode().equals(orderCode)) {
 	    		orderByCode = order;
 	    	}
@@ -50,7 +50,7 @@ public class OrdersController {
 
 	private List<Order> ordersNotShipped() {
 	    List<Order> notShipped = new ArrayList<Order>();
-	    for (Order order : orders) {
+	    for (Order order : orders.all()) {
 	    	if (!order.isShipped()) {
 	    		notShipped.add(order);
 	    	}
