@@ -1,5 +1,6 @@
 package it.xpug.woodysmart.main;
 
+import it.xpug.toolkit.db.*;
 import it.xpug.woodysmart.hello.*;
 import it.xpug.woodysmart.orders.*;
 
@@ -36,7 +37,8 @@ import javax.servlet.http.*;
  */
 public class WoodysMartServlet extends HttpServlet {
 
-	private OrdersList orders = new OrdersList();
+	private Database database;
+	private DatabaseOrdersList orders = new DatabaseOrdersList(database);
 
 	@Override
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

@@ -8,10 +8,10 @@ import javax.servlet.http.*;
 public class OrdersController {
 
 	private HttpServletRequest request;
-	private OrdersList orders;
+	private DatabaseOrdersList orders;
 	private OrdersView view;
 
-	public OrdersController(HttpServletRequest request, OrdersList orders, OrdersView view) {
+	public OrdersController(HttpServletRequest request, DatabaseOrdersList orders, OrdersView view) {
 		this.request = request;
 		this.orders = orders;
 		this.view = view;

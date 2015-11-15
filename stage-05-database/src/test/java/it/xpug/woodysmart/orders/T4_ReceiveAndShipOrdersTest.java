@@ -3,19 +3,20 @@ package it.xpug.woodysmart.orders;
 import static java.util.Arrays.*;
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
+import it.xpug.toolkit.db.*;
 
 import javax.servlet.http.*;
 
 import org.junit.*;
 
-public class T3_ReceiveAndShipOrdersTest {
+public class T4_ReceiveAndShipOrdersTest {
 
 	private HttpServletRequest request = mock(HttpServletRequest.class);
 	private OrdersView ordersView = mock(OrdersView.class);
-	private OrdersList orders = new OrdersList();
+	private DatabaseOrdersList orders = new DatabaseOrdersList(new Database(Database.IN_MEMORY_DATABASE_URL));
 	private OrdersController ordersController = new OrdersController(request, orders, ordersView);
 
-	@Test
+	@Test@Ignore
 	public void receiveAnOrder() throws Exception {
 		when(request.getMethod()).thenReturn("POST");
 		when(request.getRequestURI()).thenReturn("/orders");
