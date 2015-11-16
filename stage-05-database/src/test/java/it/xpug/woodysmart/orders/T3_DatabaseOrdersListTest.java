@@ -12,7 +12,7 @@ public class T3_DatabaseOrdersListTest {
 
 	@Test
     public void addAndFindOneOrder() throws Exception {
-		Database database = new Database(Database.IN_MEMORY_DATABASE_URL);
+		Database database = new Database(Database.TEST_DATABASE_URL);
 		DatabaseOrdersList ordersList = new DatabaseOrdersList(database);
 		Order order = new Order("a", "b", "c");
 		ordersList.add(order);

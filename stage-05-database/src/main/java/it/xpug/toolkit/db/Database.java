@@ -5,7 +5,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 public class Database {
-	public static final String IN_MEMORY_DATABASE_URL = "jdbc:h2:~/test";
+	public static final String TEST_DATABASE_URL = "jdbc:h2:mem:test";
 	private String databaseUrl;
 
 	public Database(String databaseUrl) {

@@ -13,7 +13,7 @@ public class T4_ReceiveAndShipOrdersTest {
 
 	private HttpServletRequest request = mock(HttpServletRequest.class);
 	private OrdersView ordersView = mock(OrdersView.class);
-	private DatabaseOrdersList orders = new DatabaseOrdersList(new Database(Database.IN_MEMORY_DATABASE_URL));
+	private DatabaseOrdersList orders = new DatabaseOrdersList(new Database(Database.TEST_DATABASE_URL));
 	private OrdersController ordersController = new OrdersController(request, orders, ordersView);
 
 	@Test@Ignore
