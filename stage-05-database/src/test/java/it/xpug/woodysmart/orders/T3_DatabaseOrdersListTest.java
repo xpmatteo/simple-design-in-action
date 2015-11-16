@@ -43,7 +43,7 @@ public class T3_DatabaseOrdersListTest {
 	@Test@Ignore
     public void addAndFindOneOrder() throws Exception {
 		// load production sql code
-		database.execute("runscript from 'src/main/sql/000_init_schema.sql'");
+		database.execute("runscript from 'src/main/sql/000_init_schema_info.sql'");
 		database.execute("runscript from 'src/main/sql/001_create_orders.sql'");
 
 		DatabaseOrdersList ordersList = new DatabaseOrdersList(database);
