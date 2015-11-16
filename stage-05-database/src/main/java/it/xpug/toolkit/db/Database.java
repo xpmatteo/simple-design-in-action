@@ -5,7 +5,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 public class Database {
-	public static final String TEST_DATABASE_URL = "jdbc:h2:mem:test";
+	public static final String TEST_DATABASE_URL = "jdbc:h2:mem:test;DB_CLOSE_DELAY=-1";
 	private String databaseUrl;
 
 	public Database(String databaseUrl) {
@@ -65,7 +65,7 @@ public class Database {
 	private Connection getConnection() throws SQLException, ClassNotFoundException {
 		Class.forName("org.h2.Driver");
 		Connection connection = DriverManager.getConnection(databaseUrl);
-		connection.setAutoCommit(false);
+//		connection.setAutoCommit(false);
 		return connection;
 	}
 }
