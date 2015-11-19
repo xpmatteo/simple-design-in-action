@@ -60,20 +60,39 @@ public class T3_DatabaseOrdersListTest {
 		assertEquals(0, total);
     }
 
-	@Test@Ignore
-    public void addAndFindOneOrder() throws Exception {
+	@Before
+	public void recreateSchema() {
+		database.execute("drop table if exists schema_info");
+		database.execute("drop table if exists orders");
+
 		// load production sql code
 		database.execute("runscript from 'src/main/sql/000_init_schema_info.sql'");
 		database.execute("runscript from 'src/main/sql/001_create_orders.sql'");
+	}
 
-		DatabaseOrdersList ordersList = new DatabaseOrdersList(database);
+	DatabaseOrdersList ordersList = new DatabaseOrdersList(database);
+
+	@Test@Ignore
+    public void addAndFindOneOrder() throws Exception {
 		Order order = new Order("a", "b", "c");
 		ordersList.add(order);
 
-		Collection<Order> foundOrders = ordersList.all();
+		List<Order> foundOrders = ordersList.all();
 
 		assertEquals(1, foundOrders.size());
-		assertEquals(order, foundOrders.iterator().next());
+		assertEquals(order, foundOrders.get(0));
     }
 
+	@Test@Ignore
+    public void changeAndUpdateOneOrderOnTheDatabase() throws Exception {
+		Order order = new Order("a", "b", "c");
+		ordersList.add(order);
+
+		order.ship();
+		ordersList.update(order);
+
+		List<Order> foundOrders = ordersList.all();
+		assertEquals("We still have just on order", 1, foundOrders.size());
+		assertEquals("And now the order is shipped", true, foundOrders.get(0).isShipped());
+    }
 }

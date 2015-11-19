@@ -12,8 +12,11 @@ public class DatabaseOrdersList {
 	public void add(Order orderFromRequest) {
     }
 
-	public Collection<Order> all() {
+	public List<Order> all() {
 	    return new ArrayList<Order>();
+    }
+
+	public void update(Order order) {
     }
 
 }
