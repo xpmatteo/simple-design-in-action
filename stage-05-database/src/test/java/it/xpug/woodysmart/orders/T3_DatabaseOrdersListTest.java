@@ -84,6 +84,20 @@ public class T3_DatabaseOrdersListTest {
     }
 
 	@Test@Ignore
+    public void addAndFindTwoOrders() throws Exception {
+		Order order0 = new Order("1", "2", "3");
+		Order order1 = new Order("X", "Y", "Z");
+		ordersList.add(order0);
+		ordersList.add(order1);
+
+		List<Order> foundOrders = ordersList.all();
+
+		assertEquals(2, foundOrders.size());
+		assertEquals(order0, foundOrders.get(0));
+		assertEquals(order1, foundOrders.get(1));
+    }
+
+	@Test@Ignore
     public void changeAndUpdateOneOrderOnTheDatabase() throws Exception {
 		Order order = new Order("a", "b", "c");
 		ordersList.add(order);
