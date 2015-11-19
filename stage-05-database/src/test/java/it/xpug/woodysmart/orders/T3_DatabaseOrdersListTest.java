@@ -14,7 +14,7 @@ public class T3_DatabaseOrdersListTest {
 	// learning test: how to select one value from the database
 	@Test
     public void selectOneValue() throws Exception {
-		Object actual = database.selectOneValue("select 1+2");
+		Object actual = database.selectOneValue("select ?+?", 1, 2);
 
 		// fix the assertion: what should we be expecting?
 		assertEquals(0, actual);
@@ -24,7 +24,7 @@ public class T3_DatabaseOrdersListTest {
 	@Test@Ignore
     public void createTables() throws Exception {
 		database.execute("create table foo ( a int )");
-		database.execute("insert into foo (a) values (123);");
+		database.execute("insert into foo (a) values (?);", 123);
 
 		// fix the assertion: what should we be expecting?
 		assertEquals(0, database.selectOneValue("select a from foo"));
@@ -38,6 +38,26 @@ public class T3_DatabaseOrdersListTest {
 		database.execute("insert into bar (b) values ('blah');");
 
 		assertEquals("blah", database.selectOneValue("select b from bar"));
+    }
+
+	// learning test: how to use the rows in a recordset
+	@Test@Ignore
+    public void readManyRows() throws Exception {
+		// create a table
+		database.execute("create table numbers ( x int )");
+
+		// insert 4 numbers
+		database.execute("insert into numbers (x) values (1), (2), (3), (4);");
+
+		// read back all the the rows
+		ListOfRows rows = database.select("select * from numbers");
+		int total = 0;
+		for (int i=0; i<rows.size(); i++) {
+	        total += (Integer) rows.get(i).get("x");
+        }
+
+		// fix the assertion: what value should we expect?
+		assertEquals(0, total);
     }
 
 	@Test@Ignore

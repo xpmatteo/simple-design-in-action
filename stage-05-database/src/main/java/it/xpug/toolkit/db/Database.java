@@ -47,8 +47,8 @@ public class Database {
 		}
 	}
 
-	public Object selectOneValue(String sql) {
-		ListOfRows rows = select(sql);
+	public Object selectOneValue(String sql, Object ... params) {
+		ListOfRows rows = select(sql, params);
 		Map<String, Object> map = rows.get(0);
 		Entry<String, Object> entry = map.entrySet().iterator().next();
 		return entry.getValue();
