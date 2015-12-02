@@ -45,6 +45,6 @@ public class T0_HelloController_UnitTest {
 	}
 
 	/*
-	 * Now start solving T2_HelloView_UnitTest !
+	 * Now start solving T1_HelloView_UnitTest !
 	 */
 }

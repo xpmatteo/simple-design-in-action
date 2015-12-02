@@ -25,7 +25,7 @@ public class T2_HelloView_UnitTest {
 		assertEquals("<p>Hello, Foobar!</p>", response.getBody());
     }
 
-	@Test@Ignore
+	@Test
     public void showMethodNotAllowed() throws Exception {
 		helloView.showMethodNotAllowed();
 

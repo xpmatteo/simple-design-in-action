@@ -10,7 +10,7 @@ import org.junit.*;
 
 public class T0_HelloWorld_AcceptanceTest extends TestWithALiveServer {
 
-	@Test@Ignore
+	@Test
 	public void helloWorld() throws Exception {
 		get("/hello");
 
@@ -26,7 +26,7 @@ public class T0_HelloWorld_AcceptanceTest extends TestWithALiveServer {
 		assertThat(responseBody(), containsString("Ooops! Not found!"));
 	}
 
-	@Test@Ignore
+	@Test
 	public void helloWithNameParameter() throws Exception {
 		params.put("name", "Woody");
 		get("/hello");

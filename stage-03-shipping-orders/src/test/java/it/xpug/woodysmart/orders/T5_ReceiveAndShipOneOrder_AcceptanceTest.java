@@ -62,7 +62,7 @@ public class T5_ReceiveAndShipOneOrder_AcceptanceTest extends TestWithALiveServe
 		// +-----------------------------------------+
 		// | Woody's Mart                            |
 		// |                                         |
-		// | Orders outstanding: 1                   |
+		// | Outstanding Orders: 1                   |
 		// |                                         |
 		// | Order Code: 1024                        |
 		// | Article Code: HR000                     |
@@ -79,7 +79,7 @@ public class T5_ReceiveAndShipOneOrder_AcceptanceTest extends TestWithALiveServe
 		// +-----------------------------------------+
 		// | Woody's Mart                            |
 		// |                                         |
-		// | Orders outstanding: 0                   |
+		// | Outstanding Orders: 0                   |
 		// |                                         |
 		// +-----------------------------------------+
 		// If it looks OK, then remove the following line

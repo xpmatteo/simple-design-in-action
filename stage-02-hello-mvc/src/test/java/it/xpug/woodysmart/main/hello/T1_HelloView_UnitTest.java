@@ -29,7 +29,7 @@ public class T1_HelloView_UnitTest {
 	/*
 	 * Now is a good time to start the application and test it manually!
 	 *
-	 * And also remember to un-ignore the T0_HelloWorld_AcceptanceTest
+	 * And also remember to un-ignore the T2_HelloWorld_AcceptanceTest
 	 * and check that they now work!
 	 */
 }

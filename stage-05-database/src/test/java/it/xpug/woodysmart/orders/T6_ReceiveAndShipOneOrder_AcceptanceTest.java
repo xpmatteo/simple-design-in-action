@@ -8,7 +8,7 @@ import org.junit.*;
 
 public class T6_ReceiveAndShipOneOrder_AcceptanceTest extends TestWithALiveServer {
 
-	@Test
+	@Test@Ignore
 	public void noOrdersToBeShipped() throws Exception {
 		get("/orders");
 
